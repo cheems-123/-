@@ -1,0 +1,72 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="48" width="600" height="34">
+      <content textType="headline" fontSize="28" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>汇报目录</p>
+      </content>
+    </shape>
+    <line startX="64" startY="96" endX="896" endY="96">
+      <border color="rgb(210,220,230)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="64" topLeftY="132" width="60" height="30">
+      <content textType="body" fontSize="22" bold="true" color="rgb(0,112,186)" wrap="false"><p>01</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="130" width="300" height="26">
+      <content textType="body" fontSize="18" bold="true" color="rgb(0,28,84)" wrap="false"><p>需求与目标</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="158" width="300" height="24">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)"><p>三大核心需求与看板需求编号对应</p></content>
+    </shape>
+    <line startX="64" startY="196" endX="440" endY="196"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="64" topLeftY="216" width="60" height="30">
+      <content textType="body" fontSize="22" bold="true" color="rgb(0,112,186)" wrap="false"><p>02</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="214" width="300" height="26">
+      <content textType="body" fontSize="18" bold="true" color="rgb(0,28,84)" wrap="false"><p>总体架构与技术选型</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="242" width="300" height="24">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)"><p>分层架构与各层技术选型理由</p></content>
+    </shape>
+    <line startX="64" startY="280" endX="440" endY="280"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="64" topLeftY="300" width="60" height="30">
+      <content textType="body" fontSize="22" bold="true" color="rgb(0,112,186)" wrap="false"><p>03</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="298" width="300" height="26">
+      <content textType="body" fontSize="18" bold="true" color="rgb(0,28,84)" wrap="false"><p>核心功能实现</p></content>
+    </shape>
+    <shape type="text" topLeftX="128" topLeftY="326" width="300" height="24">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)"><p>多格式笔记、AI 整理、贴吧补充、筛选排序</p></content>
+    </shape>
+
+    <shape type="text" topLeftX="512" topLeftY="132" width="60" height="30">
+      <content textType="body" fontSize="22" bold="true" color="rgb(0,112,186)" wrap="false"><p>04</p></content>
+    </shape>
+    <shape type="text" topLeftX="576" topLeftY="130" width="320" height="26">
+      <content textType="body" fontSize="18" bold="true" color="rgb(0,28,84)" wrap="false"><p>数据库设计</p></content>
+    </shape>
+    <shape type="text" topLeftX="576" topLeftY="158" width="320" height="24">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)"><p>八张数据表、索引与唯一约束设计</p></content>
+    </shape>
+    <line startX="512" startY="196" endX="896" endY="196"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="512" topLeftY="216" width="60" height="30">
+      <content textType="body" fontSize="22" bold="true" color="rgb(0,112,186)" wrap="false"><p>05</p></content>
+    </shape>
+    <shape type="text" topLeftX="576" topLeftY="214" width="320" height="26">
+      <content textType="body" fontSize="18" bold="true" color="rgb(0,28,84)" wrap="false"><p>测试部署与总结</p></content>
+    </shape>
+    <shape type="text" topLeftX="576" topLeftY="242" width="320" height="24">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)"><p>功能测试用例、启动步骤与改进方向</p></content>
+    </shape>
+    <line startX="512" startY="280" endX="896" endY="280"><border color="rgb(210,220,230)" width="1"/></line>
+  </data>
+  <note>
+    <content textType="body">
+      <p>汇报分为五个部分：先说明需求与目标，再介绍总体架构和技术选型；第三部分重点讲解四个核心功能的实现；第四部分说明数据库设计；最后给出测试部署情况和后续改进方向。</p>
+    </content>
+  </note>
+</slide>

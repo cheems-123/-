@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 · 智记 MindNotes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container">
+    <div class="card form-card">
+        <h2>账号登录</h2>
+        <label>用户名</label>
+        <input id="username" placeholder="3-20 位字母、数字或下划线">
+        <label>密码</label>
+        <input id="password" type="password" placeholder="至少 6 位">
+        <button class="btn" style="width:100%;margin-top:20px" id="btnLogin">登 录</button>
+        <div class="row-between">
+            <span class="muted">还没有账号？</span>
+            <a href="register.html">立即注册</a>
+        </div>
+        <p class="muted" style="margin-top:14px;text-align:center">演示账号：admin / 123456 ，student / 123456</p>
+    </div>
+</div>
+<script src="js/common.js"></script>
+<script>
+document.getElementById('btnLogin').onclick = async () => {
+    try {
+        await apiPost('/api/auth/login', {
+            username: document.getElementById('username').value.trim(),
+            password: document.getElementById('password').value
+        });
+        toast('登录成功');
+        setTimeout(() => location.href = 'index.html', 400);
+    } catch (e) { toast(e.message); }
+};
+document.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btnLogin').click(); });
+boot(() => {});
+</script>
+</body>
+</html>

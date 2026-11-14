@@ -1,0 +1,52 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>03　核心功能实现 · 功能一</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>多格式笔记经五步自动整理，先出摘要再供读者选择精读</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="64" topLeftY="124" width="34" height="26"><content textType="body" fontSize="18" bold="true" color="rgb(0,112,186)" wrap="false"><p>1</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="122" width="440" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>发布多格式笔记</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="146" width="440" height="32"><content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.3"><p>选择课程，按顺序插入文字段、图片、音频片段，类型 TEXT / IMAGE / AUDIO。</p></content></shape>
+
+    <shape type="text" topLeftX="64" topLeftY="184" width="34" height="26"><content textType="body" fontSize="18" bold="true" color="rgb(0,112,186)" wrap="false"><p>2</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="182" width="440" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>抽取纯文本作为整理输入</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="206" width="440" height="32"><content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.3"><p>汇总 note_segment 中全部 TEXT 片段正文，图片与音频不参与文本打分。</p></content></shape>
+
+    <shape type="text" topLeftX="64" topLeftY="244" width="34" height="26"><content textType="body" fontSize="18" bold="true" color="rgb(0,112,186)" wrap="false"><p>3</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="242" width="440" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>选择整理引擎</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="266" width="440" height="32"><content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.3"><p>启用且 API Key 有效时调用 LLM；未配置或失败，自动回退规则引擎。</p></content></shape>
+
+    <shape type="text" topLeftX="64" topLeftY="304" width="34" height="26"><content textType="body" fontSize="18" bold="true" color="rgb(0,112,186)" wrap="false"><p>4</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="302" width="440" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>规则引擎完成整理</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="326" width="440" height="32"><content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.3"><p>中文分句、词频统计提取关键词、按位置与特征打分生成摘要、抽取要点句。</p></content></shape>
+
+    <shape type="text" topLeftX="64" topLeftY="364" width="34" height="26"><content textType="body" fontSize="18" bold="true" color="rgb(0,112,186)" wrap="false"><p>5</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="362" width="440" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>结果回写并在详情页呈现</p></content></shape>
+    <shape type="text" topLeftX="104" topLeftY="386" width="440" height="32"><content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.3"><p>摘要、关键词、要点写回 note 表，详情页顶部先展示，读者据此选择精读。</p></content></shape>
+
+    <shape type="rect" topLeftX="584" topLeftY="124" width="312" height="288"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="600" topLeftY="134" width="280" height="24"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>整理产出与多格式渲染</p></content></shape>
+    <line startX="600" startY="164" endX="880" endY="164"><border color="rgb(210,220,230)" width="1"/></line>
+    <shape type="text" topLeftX="600" topLeftY="172" width="284" height="230">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.5">
+        <p><span bold="true" color="rgb(0,28,84)">摘要 summary</span>　概括全文要点，帮助快速判断是否阅读。</p>
+        <p><span bold="true" color="rgb(0,28,84)">关键词 ai_keywords</span>　逗号分隔，用于主题标签与检索。</p>
+        <p><span bold="true" color="rgb(0,28,84)">要点 ai_points</span>　换行分条，结构化呈现核心结论。</p>
+        <p><span bold="true" color="rgb(0,28,84)">片段渲染</span>　详情页按 seq 顺序渲染文字、图片与音频播放器。</p>
+        <p><span bold="true" color="rgb(0,28,84)">引擎留痕</span>　每次整理在 ai_log 记录来源 LLM 或 RULE。</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>功能一对应 AI 整理。发布时笔记由文字、图片、音频片段按顺序组成；服务层先抽出全部文字，再决定用大模型还是规则引擎。规则引擎做分句、词频关键词、关键句打分摘要和要点抽取。结果包括摘要、关键词、要点三项，回写后显示在详情页顶部，让读者先看摘要决定是否精读；每次整理的引擎来源记录在 ai_log。</p>
+    </content>
+  </note>
+</slide>

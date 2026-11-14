@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的笔记 · 智记 MindNotes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container">
+    <div style="display:flex;align-items:center">
+        <h2 class="page-title" style="margin-right:auto">我的笔记</h2>
+        <a class="btn small" href="publish.html">+ 发布新笔记</a>
+    </div>
+    <div class="card" id="mineList"></div>
+</div>
+<script src="js/common.js"></script>
+<script>
+async function loadMine() {
+    const list = await apiGet('/api/notes/mine');
+    const wrap = document.getElementById('mineList');
+    if (!list.length) {
+        wrap.innerHTML = '<p class="empty-state">还没有笔记，<a href="publish.html">去发布第一篇</a>。</p>';
+        return;
+    }
+    wrap.innerHTML = list.map(n => `
+        <div class="mine-row">
+            <div class="main">
+                <a class="note-title" href="noteDetail.html?id=${n.id}">${esc(n.title)}</a>
+                <div style="margin-top:6px">
+                    <span class="badge">${esc(n.courseName)}</span>
+                    <span class="badge ${n.shareStatus === 1 ? 'green' : 'gray'}">${n.shareStatus === 1 ? '公开共享' : '私有'}</span>
+                    <span class="muted">阅读 ${n.viewCount} · 点赞 ${n.likeCount} · ${fmtTime(n.createdAt)}</span>
+                </div>
+                ${n.aiSummary ? `<div class="ai-summary" style="margin-top:8px">AI 摘要：${esc(n.aiSummary)}</div>` : ''}
+            </div>
+            <div class="mine-ops">
+                <a class="btn ghost small" href="noteDetail.html?id=${n.id}">查看</a>
+                <button class="btn ghost small" data-share="${n.id}" data-status="${n.shareStatus}">
+                    ${n.shareStatus === 1 ? '设为私有' : '设为公开'}</button>
+                <button class="btn ghost small" data-org="${n.id}">重新整理</button>
+                <button class="btn danger small" data-del="${n.id}">删除</button>
+            </div>
+        </div>`).join('');
+
+    wrap.querySelectorAll('[data-share]').forEach(b => b.onclick = async () => {
+        const next = Number(b.dataset.status) === 1 ? 0 : 1;
+        await apiPut(`/api/notes/${b.dataset.share}/share`, { shareStatus: next });
+        toast('共享状态已更新'); loadMine();
+    });
+    wrap.querySelectorAll('[data-org]').forEach(b => b.onclick = async () => {
+        await apiPost(`/api/notes/${b.dataset.org}/organize`);
+        toast('AI 重新整理完成'); loadMine();
+    });
+    wrap.querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+        if (!confirm('确定删除这篇笔记及其全部片段与补充吗？')) return;
+        await apiDel('/api/notes/' + b.dataset.del);
+        toast('已删除'); loadMine();
+    });
+}
+
+boot(() => {
+    if (!APP.me) { location.href = 'login.html'; return; }
+    loadMine();
+});
+</script>
+</body>
+</html>

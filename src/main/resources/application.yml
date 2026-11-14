@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  application:
+    name: zhi-mindnotes
+  datasource:
+    # 数据库名 zhi_mindnotes，使用前先执行 sql/schema.sql 与 sql/data.sql
+    # createDatabaseIfNotExist=true：库不存在时自动创建，避免 Unknown database 报错
+    # characterEncoding 必须是 Java 合法字符集名（UTF-8），不能写 utf8mb4，否则 Connector/J 报 Unsupported character encoding
+    url: jdbc:mysql://localhost:3306/zhi_mindnotes?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    # 账号密码一律通过环境变量提供，本文件不保存真实密码（公开仓库，切勿硬编码凭据）
+    # 使用前执行：setx DB_USERNAME 你的账号 与 setx DB_PASSWORD 你的密码（设置后重启 IDEA 生效）
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+# 本地上传文件存储目录（图片 / 音频），启动后自动创建
+file:
+  upload-dir: ./uploads
+  # 对外访问前缀
+  access-prefix: /uploads/
+
+# AI 整理配置：预留大模型 API（OpenAI 兼容协议）。
+# enabled=false 或 api-key 为空时，自动回退到内置规则式整理（离线可演示）。
+ai:
+  enabled: false
+  base-url: https://api.openai.com/v1
+  api-key: ""
+  model: gpt-4o-mini
+  timeout-seconds: 15
+
+logging:
+  level:
+    com.zhmindnotes: info
+
+# 启动完成后自动用默认浏览器打开 http://localhost:8080/index.html
+# 想手动打开（或部署到无桌面服务器）时改成 false
+app:
+  auto-open-browser: true

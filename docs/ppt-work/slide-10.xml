@@ -1,0 +1,57 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>05　测试部署与总结</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>测试覆盖核心链路，四步完成本地启动与演示</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="64" topLeftY="124" width="400" height="22"><content textType="body" fontSize="15" bold="true" color="rgb(0,28,84)" wrap="false"><p>功能测试覆盖</p></content></shape>
+    <shape type="text" topLeftX="64" topLeftY="152" width="404" height="210">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.45">
+        <ul>
+          <li><p>注册登录：BCrypt 校验密码，Session 维持登录态，退出即清除。</p></li>
+          <li><p>发布笔记：文字/图片/音频片段按 seq 落库，扩展名白名单校验。</p></li>
+          <li><p>AI 整理：默认规则引擎产出摘要、关键词、要点；配密钥可切 LLM，失败自动回退。</p></li>
+          <li><p>详情与点赞：进入详情阅读量加一；联合唯一约束下点赞不可重复。</p></li>
+          <li><p>贴吧补充：主楼层与楼中楼层级正确，补充点赞计数生效。</p></li>
+          <li><p>列表推荐：课程过滤、关键词检索、views / likes / newest 排序结果正确。</p></li>
+        </ul>
+      </content>
+    </shape>
+
+    <line startX="492" startY="124" endX="492" endY="362"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="516" topLeftY="124" width="380" height="22"><content textType="body" fontSize="15" bold="true" color="rgb(0,28,84)" wrap="false"><p>部署启动四步</p></content></shape>
+    <shape type="text" topLeftX="516" topLeftY="152" width="380" height="210">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.5">
+        <p><span bold="true" color="rgb(0,112,186)">1　</span>执行 sql/schema.sql 建库建表；data.sql 可选，启动时自动补齐课程。</p>
+        <p><span bold="true" color="rgb(0,112,186)">2　</span>修改 application.yml 中 spring.datasource.password 为本机 MySQL root 密码。</p>
+        <p><span bold="true" color="rgb(0,112,186)">3　</span>IDEA 使用内置 Maven 构建并运行启动类 ZhMindNotesApplication，端口 8080。</p>
+        <p><span bold="true" color="rgb(0,112,186)">4　</span>浏览器打开 index.html；演示账号 admin、student，密码均为 123456。</p>
+      </content>
+    </shape>
+
+    <line startX="64" startY="374" endX="896" endY="374"><border color="rgb(0,48,135)" width="1"/></line>
+    <shape type="text" topLeftX="64" topLeftY="384" width="404" height="80">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.45">
+        <p><span bold="true" color="rgb(0,28,84)">已完成</span>　三大核心需求全部实现，并补齐注册登录、点赞计数、公开/私有分享与演示种子数据；前后端路由、数据表与接口经静态一致性校验。</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="492" topLeftY="384" width="404" height="80">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.45">
+        <p><span bold="true" color="rgb(0,28,84)">改进方向</span>　接入真实大模型提升摘要质量；阅读量增加会话级节流避免刷新重复计数；后续补充分页、收藏、补充排序与前端交互细化。</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>最后是测试、部署与总结。测试覆盖注册登录、多格式发布、AI 整理、阅读点赞、贴吧补充和列表排序六条主线。本地启动只需建库、改数据库密码、用 IDEA 内置 Maven 运行、打开首页四步，演示账号 admin 和 student 密码都是 123456。系统已完成三项核心需求；后续可接入真实大模型、优化阅读量统计并增加分页、收藏等功能。</p>
+    </content>
+  </note>
+</slide>

@@ -1,0 +1,74 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>04　数据库设计</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>八张表：主表承载整理结果，子表分别支撑片段、点赞与补充</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <table topLeftX="64" topLeftY="122" width="832" height="266">
+      <colgroup><col width="168"/><col width="248"/><col width="416"/></colgroup>
+      <tr height="26">
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="11" bold="true" color="rgba(255,255,255,1)" textAlign="center"><p>数据表</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="11" bold="true" color="rgba(255,255,255,1)" textAlign="left"><p>职责</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="11" bold="true" color="rgba(255,255,255,1)" textAlign="left"><p>关键字段与约束</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>user</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>用户注册与登录</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>username 唯一；password_hash 存 BCrypt；nickname</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>course</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>课程分类字典（6 门）</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>id、name，启动时幂等补齐种子数据</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>note</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>笔记主表与 AI 整理结果</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>author_id、course_id、share_status、view_count、like_count、summary、ai_keywords、ai_points</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>note_segment</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>文字/图片/音频多格式片段</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note_id、seq 排序、kind=TEXT/IMAGE/AUDIO、text_content、file_path</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>note_like</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>笔记点赞记录</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>联合唯一索引 (note_id, user_id) 防重复点赞</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>contribution</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>贴吧补充：主楼层与楼中楼</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note_id、author_id、parent_id（0 为主楼层）、content、like_count</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>contribution_like</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>补充内容点赞记录</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>联合唯一索引 (contribution_id, user_id)</p></content></td>
+      </tr>
+      <tr height="30">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>ai_log</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>AI 整理引擎留痕</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note_id、engine=LLM/RULE、created_at、整理摘要明细</p></content></td>
+      </tr>
+    </table>
+
+    <shape type="text" topLeftX="64" topLeftY="398" width="832" height="52">
+      <content textType="caption" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.4">
+        <p>关系约束：note.author_id 关联 user；note_segment、note_like、contribution 均关联 note；两张点赞表用联合唯一索引保证一人一赞；删除笔记时应用层级联清理片段、补充、点赞与整理日志。</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>数据库共八张表。user 和 course 是基础表；note 是主表，除了基本字段还保存摘要、关键词、要点三个 AI 字段；note_segment 用 kind 和 seq 支撑多格式片段排序；两张点赞表用联合唯一索引防重复；contribution 用 parent_id 区分主楼层和楼中楼；ai_log 记录每次整理由大模型还是规则引擎完成。</p>
+    </content>
+  </note>
+</slide>

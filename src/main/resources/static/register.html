@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 · 智记 MindNotes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container">
+    <div class="card form-card">
+        <h2>注册账号</h2>
+        <label>用户名（登录名）</label>
+        <input id="username" placeholder="3-20 位字母、数字或下划线">
+        <label>昵称（可留空，默认同用户名）</label>
+        <input id="nickname" placeholder="展示昵称">
+        <label>密码</label>
+        <input id="password" type="password" placeholder="至少 6 位">
+        <label>确认密码</label>
+        <input id="password2" type="password" placeholder="再次输入密码">
+        <button class="btn" style="width:100%;margin-top:20px" id="btnReg">注 册</button>
+        <div class="row-between">
+            <span class="muted">已有账号？</span>
+            <a href="login.html">返回登录</a>
+        </div>
+    </div>
+</div>
+<script src="js/common.js"></script>
+<script>
+document.getElementById('btnReg').onclick = async () => {
+    const p1 = document.getElementById('password').value;
+    const p2 = document.getElementById('password2').value;
+    if (p1 !== p2) { toast('两次密码不一致'); return; }
+    try {
+        await apiPost('/api/auth/register', {
+            username: document.getElementById('username').value.trim(),
+            nickname: document.getElementById('nickname').value.trim(),
+            password: p1
+        });
+        toast('注册成功，请登录');
+        setTimeout(() => location.href = 'login.html', 600);
+    } catch (e) { toast(e.message); }
+};
+boot(() => {});
+</script>
+</body>
+</html>

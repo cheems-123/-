@@ -1,0 +1,51 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>03　核心功能实现 · 功能二</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>贴吧式补充：原作保持不变，主楼层与楼中楼两级协作</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="rect" topLeftX="80" topLeftY="130" width="400" height="44"><fill><fillColor color="rgba(0,48,135,1)"/></fill></shape>
+    <shape type="text" topLeftX="80" topLeftY="130" width="400" height="44"><content textType="body" fontSize="13" bold="true" color="rgba(255,255,255,1)" textAlign="center" verticalAlign="middle"><p>原笔记 note（正文与多格式片段保持只读，不被补充改写）</p></content></shape>
+    <line startX="280" startY="174" endX="280" endY="206"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+
+    <shape type="rect" topLeftX="80" topLeftY="210" width="190" height="46"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="80" topLeftY="210" width="190" height="46"><content textType="body" fontSize="12" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p>主楼层补充 A<br/>parent_id = 0</p></content></shape>
+    <shape type="rect" topLeftX="290" topLeftY="210" width="190" height="46"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="290" topLeftY="210" width="190" height="46"><content textType="body" fontSize="12" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p>主楼层补充 B<br/>parent_id = 0</p></content></shape>
+
+    <line startX="175" startY="256" endX="175" endY="284"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+    <shape type="rect" topLeftX="96" topLeftY="288" width="158" height="40"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="96" topLeftY="288" width="158" height="40"><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="center" verticalAlign="middle"><p>楼中楼 A-1<br/>parent_id = A.id</p></content></shape>
+    <shape type="rect" topLeftX="266" topLeftY="288" width="158" height="40"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="266" topLeftY="288" width="158" height="40"><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="center" verticalAlign="middle"><p>楼中楼 A-2<br/>parent_id = A.id</p></content></shape>
+
+    <shape type="text" topLeftX="80" topLeftY="342" width="400" height="20"><content textType="caption" fontSize="11" color="rgb(71,85,105)"><p>图 2 · contribution 表两级结构，补充记录均挂在 note_id 之下。</p></content></shape>
+
+    <shape type="text" topLeftX="540" topLeftY="130" width="356" height="24"><content textType="body" fontSize="15" bold="true" color="rgb(0,28,84)" wrap="false"><p>协作补充规则与接口</p></content></shape>
+    <line startX="540" startY="160" endX="896" endY="160"><border color="rgb(210,220,230)" width="1"/></line>
+    <shape type="text" topLeftX="540" topLeftY="168" width="356" height="250">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.5">
+        <ul>
+          <li><p><span bold="true" color="rgb(0,28,84)">独立挂载：</span>补充记录 note_id，不修改原笔记正文与片段。</p></li>
+          <li><p><span bold="true" color="rgb(0,28,84)">两级层级：</span>主楼层 parent_id=0；楼中楼 parent_id 指向父补充 id。</p></li>
+          <li><p><span bold="true" color="rgb(0,28,84)">点赞去重：</span>contribution_like(contribution_id, user_id) 联合唯一，同一用户不可重复赞。</p></li>
+          <li><p><span bold="true" color="rgb(0,28,84)">读取接口：</span>GET /api/notes/{id}/contributions 按时间与点赞返回楼层。</p></li>
+          <li><p><span bold="true" color="rgb(0,28,84)">写入接口：</span>POST 发主楼层或回复；POST /api/contributions/{id}/like 切换点赞。</p></li>
+          <li><p><span bold="true" color="rgb(0,28,84)">展示方式：</span>详情页底部以楼层编号呈现原作补充与回复，支持点赞计数。</p></li>
+        </ul>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>功能二是贴吧式共享补充。设计上保证原作不被改写：所有补充都存在 contribution 表并挂到 note_id 下。主楼层 parent_id 为 0，回复某条补充形成楼中楼，parent_id 指向父记录。补充点赞用联合唯一索引防止重复。前端在详情页底部按楼层展示，登录用户可发帖、回复和点赞。</p>
+    </content>
+  </note>
+</slide>

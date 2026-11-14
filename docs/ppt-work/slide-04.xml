@@ -1,0 +1,48 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>02　总体架构与技术选型</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>五层分层架构：AJAX 前端调用 REST 接口，逐层下沉到 MySQL</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="rect" topLeftX="140" topLeftY="124" width="500" height="50"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="140" topLeftY="124" width="500" height="50"><content textType="body" fontSize="13" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p><span bold="true">表现层 View　</span>静态 HTML · CSS · 原生 JavaScript（fetch + FormData AJAX，共 6 个页面）</p></content></shape>
+    <line startX="390" startY="174" endX="390" endY="188"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+
+    <shape type="rect" topLeftX="140" topLeftY="188" width="500" height="50"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="140" topLeftY="188" width="500" height="50"><content textType="body" fontSize="13" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p><span bold="true">控制层 Controller　</span>Auth · Course · Note · Contribution · File 五个 REST 控制器</p></content></shape>
+    <line startX="390" startY="238" endX="390" endY="252"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+
+    <shape type="rect" topLeftX="140" topLeftY="252" width="500" height="50"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="140" topLeftY="252" width="500" height="50"><content textType="body" fontSize="13" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p><span bold="true">服务层 Service　</span>用户 / 笔记 / 补充 / 文件存储，AiOrganizeService 统一编排</p></content></shape>
+    <line startX="390" startY="302" endX="390" endY="316"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+
+    <shape type="rect" topLeftX="140" topLeftY="316" width="500" height="50"><fill><fillColor color="rgba(212,229,247,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="140" topLeftY="316" width="500" height="50"><content textType="body" fontSize="13" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p><span bold="true">持久层 DAO　</span>Spring JDBC · JdbcTemplate，SQL 透明、易讲解，不引入 ORM</p></content></shape>
+    <line startX="390" startY="366" endX="390" endY="380"><border color="rgb(0,112,186)" width="1"/><endArrow type="arrow"/></line>
+
+    <shape type="rect" topLeftX="140" topLeftY="380" width="500" height="50"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,48,135)" width="2"/></shape>
+    <shape type="text" topLeftX="140" topLeftY="380" width="500" height="50"><content textType="body" fontSize="13" color="rgb(0,28,84)" textAlign="center" verticalAlign="middle"><p><span bold="true">存储层 MySQL 8.0　</span>user / course / note / note_segment 等 8 张表，utf8mb4</p></content></shape>
+
+    <shape type="rect" topLeftX="688" topLeftY="252" width="208" height="114"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="700" topLeftY="258" width="184" height="104"><content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.35" verticalAlign="top"><p><span bold="true" color="rgb(0,28,84)">AI 整理服务（旁支）</span></p><p>LlmAiAdapter 走 OpenAI 兼容接口优先；未配置密钥或调用失败，自动回退 RuleAiOrganizer 规则引擎；来源写入 ai_log。</p></content></shape>
+
+    <shape type="rect" topLeftX="688" topLeftY="380" width="208" height="50"><fill><fillColor color="rgba(255,255,255,1)"/></fill><border color="rgb(0,112,186)" width="1"/></shape>
+    <shape type="text" topLeftX="700" topLeftY="380" width="184" height="50"><content textType="body" fontSize="12" color="rgb(71,85,105)" textAlign="center" verticalAlign="middle"><p><span bold="true" color="rgb(0,28,84)">本地文件存储</span>　图片/音频落盘 ./uploads，由 /uploads/** 映射提供</p></content></shape>
+
+    <shape type="text" topLeftX="64" topLeftY="444" width="832" height="20">
+      <content textType="caption" fontSize="11" color="rgb(71,85,105)"><p>图 1 · 请求自上而下贯穿五层，返回 JSON 由前端渲染；AI 服务与文件存储作为服务层的两个协作旁支。</p></content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>系统采用经典五层结构：最上层是六个静态 HTML 页面，通过 fetch 发 AJAX 请求；进入五个 Spring Boot 控制器；由 service 层处理业务和 AI 编排；再通过 JdbcTemplate 访问 MySQL。右侧两个旁支是 AI 整理服务和本地文件存储。选用 JdbcTemplate 而非 ORM，是为了 SQL 透明、便于答辩讲解。</p>
+    </content>
+  </note>
+</slide>

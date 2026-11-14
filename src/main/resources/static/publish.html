@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布笔记 · 智记 MindNotes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container" style="max-width:860px">
+    <h2 class="page-title">发布新笔记（支持文字 / 图片 / 音频多格式混排，保存后自动 AI 整理）</h2>
+    <div class="card">
+        <label>笔记标题</label>
+        <input id="title" placeholder="例如：TCP 三次握手复习要点">
+        <label>所属课程</label>
+        <select id="course"></select>
+        <label>共享方式</label>
+        <div style="display:flex;gap:24px;font-size:14px">
+            <label style="display:flex;gap:6px;align-items:center;margin:0">
+                <input type="radio" name="share" value="1" checked style="width:auto">公开共享（可被筛选阅读、供他人补充）</label>
+            <label style="display:flex;gap:6px;align-items:center;margin:0">
+                <input type="radio" name="share" value="0" style="width:auto">私有（仅本人“我的笔记”可见）</label>
+        </div>
+
+        <label>内容片段（按顺序拼接；可混排文字、图片、音频）</label>
+        <div class="seg-toolbar">
+            <button class="btn ghost small" data-add="TEXT">+ 文字片段</button>
+            <button class="btn ghost small" data-add="IMAGE">+ 图片片段</button>
+            <button class="btn ghost small" data-add="AUDIO">+ 音频片段</button>
+        </div>
+        <div id="segEditor"></div>
+
+        <div style="margin-top:18px;display:flex;gap:12px">
+            <button class="btn" id="btnSubmit">保存并自动 AI 整理</button>
+            <a class="btn ghost" href="index.html">取消</a>
+        </div>
+    </div>
+</div>
+<script src="js/common.js"></script>
+<script>
+let segments = []; // {type, text, file, url, caption}
+
+async function loadCourses() {
+    const courses = await apiGet('/api/courses');
+    document.getElementById('course').innerHTML =
+        courses.map(c => `<option value="${c.id}">${esc(c.name)}（${esc(c.code)}）</option>`).join('');
+}
+
+function renderEditor() {
+    const wrap = document.getElementById('segEditor');
+    wrap.innerHTML = segments.map((s, i) => {
+        let body = '';
+        if (s.type === 'TEXT') {
+            body = `<textarea data-idx="${i}" data-field="text" rows="4"
+                placeholder="输入文字知识点、定义、公式说明……">${esc(s.text || '')}</textarea>`;
+        } else if (s.type === 'IMAGE') {
+            body = `
+                <input type="file" accept="image/*" data-idx="${i}" data-field="file">
+                <label>图片说明（caption，也会参与 AI 摘要）</label>
+                <input data-idx="${i}" data-field="caption" value="${esc(s.caption || '')}" placeholder="例如：三次握手时序图">
+                ${s.url ? `<img class="preview-img" src="${esc(s.url)}">` : ''}`;
+        } else {
+            body = `
+                <input type="file" accept="audio/*" data-idx="${i}" data-field="file">
+                <label>音频说明（caption）</label>
+                <input data-idx="${i}" data-field="caption" value="${esc(s.caption || '')}" placeholder="例如：课堂录音 03:20 起讲解……">`;
+        }
+        return `<div class="seg-editor">
+            <div class="head-row">
+                <span class="seg-type-label">${s.type === 'TEXT' ? '文字' : s.type === 'IMAGE' ? '图片' : '音频'}片段 ${i + 1}</span>
+                <button class="btn ghost small" data-del="${i}">删除</button>
+            </div>${body}</div>`;
+    }).join('');
+
+    wrap.querySelectorAll('[data-field="file"]').forEach(inp => {
+        inp.onchange = e => { segments[Number(e.target.dataset.idx)].file = e.target.files[0]; };
+    });
+    wrap.querySelectorAll('[data-field="text"]').forEach(inp => {
+        inp.oninput = e => { segments[Number(e.target.dataset.idx)].text = e.target.value; };
+    });
+    wrap.querySelectorAll('[data-field="caption"]').forEach(inp => {
+        inp.oninput = e => { segments[Number(e.target.dataset.idx)].caption = e.target.value; };
+    });
+    wrap.querySelectorAll('[data-del]').forEach(b => {
+        b.onclick = () => { segments.splice(Number(b.dataset.del), 1); renderEditor(); };
+    });
+}
+
+document.querySelectorAll('[data-add]').forEach(b => {
+    b.onclick = () => { segments.push({ type: b.dataset.add }); renderEditor(); };
+});
+
+document.getElementById('btnSubmit').onclick = async () => {
+    if (!requireLogin()) return;
+    const title = document.getElementById('title').value.trim();
+    if (!title) { toast('请填写标题'); return; }
+    const courseId = Number(document.getElementById('course').value);
+    const shareStatus = Number(document.querySelector('input[name=share]:checked').value);
+
+    // 先把图片/音频文件上传换 URL，再组装片段
+    const segs = [];
+    for (let s of segments) {
+        if (s.type === 'TEXT') {
+            if ((s.text || '').trim()) segs.push({ segType: 'TEXT', contentText: s.text.trim() });
+        } else if (s.type === 'IMAGE') {
+            let url = s.url || '';
+            if (s.file) { try { url = await uploadMedia(s.file, 'image'); } catch (e) { toast(e.message); return; } }
+            if (url || (s.caption || '').trim()) segs.push({ segType: 'IMAGE', mediaUrl: url, caption: s.caption });
+        } else {
+            let url = s.url || '';
+            if (s.file) { try { url = await uploadMedia(s.file, 'audio'); } catch (e) { toast(e.message); return; } }
+            if (url || (s.caption || '').trim()) segs.push({ segType: 'AUDIO', mediaUrl: url, caption: s.caption });
+        }
+    }
+    if (!segs.length) { toast('至少保留一个有效内容片段'); return; }
+
+    const btn = document.getElementById('btnSubmit');
+    btn.disabled = true; btn.textContent = '保存与整理中……';
+    try {
+        const r = await apiPost('/api/notes', { title, courseId, shareStatus, segments: segs });
+        toast('发布成功，AI 已自动整理');
+        setTimeout(() => location.href = 'noteDetail.html?id=' + r.id, 600);
+    } catch (e) {
+        toast(e.message);
+        btn.disabled = false; btn.textContent = '保存并自动 AI 整理';
+    }
+};
+
+boot(() => {
+    if (!APP.me) { location.href = 'login.html'; return; }
+    loadCourses().then(renderEditor);
+});
+</script>
+</body>
+</html>

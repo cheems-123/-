@@ -1,0 +1,72 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="40" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>03　核心功能实现 · 功能三</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="62" width="832" height="32">
+      <content textType="headline" fontSize="25" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>课程分类过滤叠加三种排序，阅读量与点赞量驱动推荐</p>
+      </content>
+    </shape>
+    <line startX="64" startY="106" endX="896" endY="106"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <shape type="text" topLeftX="64" topLeftY="120" width="600" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>列表接口 GET /api/notes?courseId=&amp;sort=&amp;keyword= 的三种排序</p></content></shape>
+
+    <table topLeftX="64" topLeftY="148" width="832" height="138">
+      <colgroup><col width="150"/><col width="216"/><col width="246"/><col width="220"/></colgroup>
+      <tr height="28">
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="center"><p>排序参数 sort</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="left"><p>推荐含义</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="left"><p>排序依据（SQL ORDER BY）</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="center"><p>对应需求</p></content></td>
+      </tr>
+      <tr height="36">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>newest</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>最新发布优先（默认）</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note.created_at DESC</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(0,112,186)" textAlign="center"><p>默认浏览</p></content></td>
+      </tr>
+      <tr height="36">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>views</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>阅读量从高到低推荐</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note.view_count DESC</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(0,112,186)" textAlign="center"><p>按阅读量高低</p></content></td>
+      </tr>
+      <tr height="38">
+        <td><content textType="body" fontSize="11" bold="true" color="rgb(0,28,84)" textAlign="center"><p>likes</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>点赞量从高到低推荐</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(71,85,105)" textAlign="left"><p>note.like_count DESC</p></content></td>
+        <td><content textType="body" fontSize="11" color="rgb(0,112,186)" textAlign="center"><p>按点赞量高低</p></content></td>
+      </tr>
+    </table>
+
+    <shape type="text" topLeftX="64" topLeftY="306" width="400" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>筛选条件组合</p></content></shape>
+    <shape type="text" topLeftX="64" topLeftY="332" width="400" height="120">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.5">
+        <ul>
+          <li><p>courseId：课程字典下拉过滤，只展示所选课程的笔记。</p></li>
+          <li><p>keyword：在标题、摘要、关键词字段做模糊匹配。</p></li>
+          <li><p>可见性：仅返回 share_status=1 的公开笔记，私有笔记非作者返回 403。</p></li>
+        </ul>
+      </content>
+    </shape>
+
+    <line startX="486" startY="306" endX="486" endY="452"><border color="rgb(210,220,230)" width="1"/></line>
+    <shape type="text" topLeftX="512" topLeftY="306" width="384" height="22"><content textType="body" fontSize="14" bold="true" color="rgb(0,28,84)" wrap="false"><p>计数与去重机制</p></content></shape>
+    <shape type="text" topLeftX="512" topLeftY="332" width="384" height="120">
+      <content textType="body" fontSize="12" color="rgb(71,85,105)" lineSpacing="multiple:1.5">
+        <ul>
+          <li><p>打开笔记详情时 view_count 加 1，作为阅读量排序依据。</p></li>
+          <li><p>note_like(note_id, user_id) 联合唯一，保证同一用户对同一笔记只赞一次。</p></li>
+          <li><p>点赞成功后回写 note.like_count；取消点赞同步递减，供 likes 排序使用。</p></li>
+        </ul>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>功能三是筛选阅读与推荐。前端列表把课程下拉、关键词框和三种排序传到同一个列表接口。排序默认最新，views 按阅读量降序，likes 按点赞量降序。阅读量在打开详情时加一；点赞通过联合唯一索引防重复，并回写计数字段用于排序。私有笔记只对作者可见，保证隐私。</p>
+    </content>
+  </note>
+</slide>

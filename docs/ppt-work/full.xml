@@ -1,0 +1,1325 @@
+<presentation id="DrR1stUwNlDvaadpdkMc1cwEnOg" xmlns="https://www.larkoffice.com/sml/2.0" width="960" height="540">
+  <title>智记MindNotes系统答辩汇报</title>
+  <theme>
+    <textStyles>
+      <headline fontColor="rgba(31, 35, 41, 1)"/>
+      <sub-headline fontColor="rgba(31, 35, 41, 1)"/>
+      <body fontColor="rgba(31, 35, 41, 1)"/>
+      <caption fontColor="rgba(155, 158, 162, 1)" fontSize="14"/>
+    </textStyles>
+  </theme>
+  <slide id="ppp">
+    <style>
+      <fill id="fpp">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="600" height="28" topLeftX="64" topLeftY="118" type="text" id="bKw">
+        <content textType="caption" fontSize="13" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>ZHI-MINDNOTES · 课程设计答辩汇报</p>
+        </content>
+      </shape>
+      <shape width="832" height="64" topLeftX="64" topLeftY="160" type="text" id="bKc">
+        <content textType="title" fontSize="40" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>智记 MindNotes 学习笔记系统</p>
+        </content>
+      </shape>
+      <shape width="832" height="34" topLeftX="64" topLeftY="238" type="text" id="bKK">
+        <content textType="sub-headline" fontSize="19" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" bold="true">
+          <p>AI 自动整理摘要 · 贴吧式共享补充 · 课程分类与阅读量/点赞量排序推荐</p>
+        </content>
+      </shape>
+      <line id="bKh" startX="64" startY="304" endX="280.0023148024113" endY="304">
+        <border color="rgba(0, 48, 135, 1)"/>
+      </line>
+      <shape width="832" height="28" topLeftX="64" topLeftY="326" type="text" id="bKn">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+          <p>技术栈：Java（Spring Boot 2.7.18）+ MySQL 8.0 + 静态 HTML / CSS / 原生 JavaScript（fetch AJAX）</p>
+        </content>
+      </shape>
+      <shape width="832" height="26" topLeftX="64" topLeftY="392" type="text" id="bKk">
+        <content textType="caption" fontSize="13" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>作者：董利研　｜　开发工具：IntelliJ IDEA 2025.3.4、MySQL 8.0、Navicat Premium 16　｜　2026 年 11 月</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bKx">
+      <content>
+        <p>各位老师好，本次汇报的项目是智记 MindNotes 学习笔记系统。系统围绕三个核心目标：用 AI 自动整理笔记并生成摘要便于快速选择阅读；以贴吧形式支持同伴在原作基础上补充；按课程分类并按阅读量、点赞量排序推荐。技术上采用 Spring Boot、MySQL 与静态 HTML 实现。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppC">
+    <style>
+      <fill id="fpC">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="600" height="34" topLeftX="64" topLeftY="48" type="text" id="bKV">
+        <content textType="headline" fontSize="28" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>汇报目录</p>
+        </content>
+      </shape>
+      <line id="bKt" startX="64" startY="96" endX="896.0006009613214" endY="96">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="60" height="30" topLeftX="64" topLeftY="132" type="text" id="bKU">
+        <content fontSize="22" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>01</p>
+        </content>
+      </shape>
+      <shape width="300" height="26" topLeftX="128" topLeftY="130" type="text" id="bKg">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>需求与目标</p>
+        </content>
+      </shape>
+      <shape width="300" height="24" topLeftX="128" topLeftY="158" type="text" id="bKP">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>三大核心需求与看板需求编号对应</p>
+        </content>
+      </shape>
+      <line id="bKO" startX="64" startY="196" endX="440.0013297848825" endY="196">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="60" height="30" topLeftX="64" topLeftY="216" type="text" id="bKr">
+        <content fontSize="22" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>02</p>
+        </content>
+      </shape>
+      <shape width="300" height="26" topLeftX="128" topLeftY="214" type="text" id="bKp">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>总体架构与技术选型</p>
+        </content>
+      </shape>
+      <shape width="300" height="24" topLeftX="128" topLeftY="242" type="text" id="bKv">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>分层架构与各层技术选型理由</p>
+        </content>
+      </shape>
+      <line id="bKJ" startX="64" startY="280" endX="440.0013297848825" endY="280">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="60" height="30" topLeftX="64" topLeftY="300" type="text" id="bKo">
+        <content fontSize="22" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>03</p>
+        </content>
+      </shape>
+      <shape width="300" height="26" topLeftX="128" topLeftY="298" type="text" id="bKq">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>核心功能实现</p>
+        </content>
+      </shape>
+      <shape width="300" height="24" topLeftX="128" topLeftY="326" type="text" id="bKa">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>多格式笔记、AI 整理、贴吧补充、筛选排序</p>
+        </content>
+      </shape>
+      <shape width="60" height="30" topLeftX="512" topLeftY="132" type="text" id="bKN">
+        <content fontSize="22" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>04</p>
+        </content>
+      </shape>
+      <shape width="320" height="26" topLeftX="576" topLeftY="130" type="text" id="bKs">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>数据库设计</p>
+        </content>
+      </shape>
+      <shape width="320" height="24" topLeftX="576" topLeftY="158" type="text" id="bKY">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>八张数据表、索引与唯一约束设计</p>
+        </content>
+      </shape>
+      <line id="bKE" startX="512" startY="196" endX="896.0013020811257" endY="196">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="60" height="30" topLeftX="512" topLeftY="216" type="text" id="bKH">
+        <content fontSize="22" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>05</p>
+        </content>
+      </shape>
+      <shape width="320" height="26" topLeftX="576" topLeftY="214" type="text" id="bKu">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>测试部署与总结</p>
+        </content>
+      </shape>
+      <shape width="320" height="24" topLeftX="576" topLeftY="242" type="text" id="bKf">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>功能测试用例、启动步骤与改进方向</p>
+        </content>
+      </shape>
+      <line id="bKA" startX="512" startY="280" endX="896.0013020811257" endY="280">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+    </data>
+    <note id="bKB">
+      <content>
+        <p>汇报分为五个部分：先说明需求与目标，再介绍总体架构和技术选型；第三部分重点讲解四个核心功能的实现；第四部分说明数据库设计；最后给出测试部署情况和后续改进方向。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppS">
+    <style>
+      <fill id="fpS">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="44" type="text" id="bxc">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>01　需求与目标</p>
+        </content>
+      </shape>
+      <shape width="832" height="34" topLeftX="64" topLeftY="66" type="text" id="bxG">
+        <content textType="headline" fontSize="26" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>三项核心需求落地为 SB-01～SB-06 六个看板任务</p>
+        </content>
+      </shape>
+      <line id="bxL" startX="64" startY="112" endX="896.0006009613214" endY="112">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <table id="bxx" width="832" height="196" topLeftX="64" topLeftY="134">
+        <colgroup>
+          <col span="1" width="176"/>
+          <col span="1" width="446"/>
+          <col span="1" width="210"/>
+        </colgroup>
+        <tr height="30">
+          <td id="bxb">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>核心需求</p>
+            </content>
+          </td>
+          <td id="bxh">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>功能要点</p>
+            </content>
+          </td>
+          <td id="bxj">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>对应看板任务</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="55">
+          <td id="bxC">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>① AI 笔记整理</p>
+            </content>
+          </td>
+          <td id="bxD">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>发布后自动生成摘要、关键词与要点，便于读者先看摘要再选择阅读；笔记由文字、图片、音频片段混合构成。</p>
+            </content>
+          </td>
+          <td id="bxQ">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>SB-05</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="55">
+          <td id="bxy">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>② 贴吧式共享补充</p>
+            </content>
+          </td>
+          <td id="bxw">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>笔记详情以楼层形式展示读者补充，支持主楼层跟帖与楼中楼回复，并可对补充内容点赞，在原作基础上协作完善。</p>
+            </content>
+          </td>
+          <td id="bxn">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>SB-04（扩展）</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="56">
+          <td id="bxe">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>③ 分类筛选与排序</p>
+            </content>
+          </td>
+          <td id="bxS">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>笔记按课程分类，支持课程过滤与关键词检索；列表可按最新发布、阅读量高低、点赞量高低三种方式排序推荐。</p>
+            </content>
+          </td>
+          <td id="bxX">
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>SB-04</p>
+            </content>
+          </td>
+        </tr>
+      </table>
+      <line id="bxk" startX="64" startY="362" endX="896.0006009613214" endY="362">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="832" height="60" topLeftX="64" topLeftY="374" type="text" id="bxd">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.4">
+          <p>支撑性任务：SB-01 框架落地、数据库适配与种子数据；SB-02 用户注册登录；SB-03 笔记上传与我的笔记；SB-06 全模块联调测试与演示。</p>
+          <p>总体目标：在离线可演示的前提下实现三大核心功能，并预留大模型接口，具备后续接入真实 LLM 的扩展能力。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bxK">
+      <content>
+        <p>题目提出三项核心需求：AI 整理摘要、贴吧式共享补充、按课程分类并按阅读量或点赞量排序。它们分别对应看板 SB-05、SB-04 扩展和 SB-04 浏览列表；其余 SB-01 到 SB-03、SB-06 是支撑性基础工作。系统在离线环境即可完整演示，同时预留大模型接口。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppD">
+    <style>
+      <fill id="fpD">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bKZ">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>02　总体架构与技术选型</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bKI">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>五层分层架构：AJAX 前端调用 REST 接口，逐层下沉到 MySQL</p>
+        </content>
+      </shape>
+      <line id="bKi" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="500" height="50" topLeftX="140" topLeftY="124" presetHandlers="0" type="rect" id="bKG">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="500" height="50" topLeftX="140" topLeftY="124" type="text" id="bKQ">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p><strong>表现层 View　</strong>静态 HTML · CSS · 原生 JavaScript（fetch + FormData AJAX，共 6 个页面）</p>
+        </content>
+      </shape>
+      <line id="bKX" startX="390" startY="174" endX="390" endY="188.0356688476182">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="500" height="50" topLeftX="140" topLeftY="188" presetHandlers="0" type="rect" id="bKT">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="500" height="50" topLeftX="140" topLeftY="188" type="text" id="bKz">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p><strong>控制层 Controller　</strong>Auth · Course · Note · Contribution · File 五个 REST 控制器</p>
+        </content>
+      </shape>
+      <line id="bKC" startX="390.00000000000006" startY="238" endX="390.00000000000006" endY="252.0356688476182">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="500" height="50" topLeftX="140" topLeftY="252" presetHandlers="0" type="rect" id="bKS">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="500" height="50" topLeftX="140" topLeftY="252" type="text" id="bKL">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p><strong>服务层 Service　</strong>用户 / 笔记 / 补充 / 文件存储，AiOrganizeService 统一编排</p>
+        </content>
+      </shape>
+      <line id="bKR" startX="390" startY="302" endX="390" endY="316.0356688476182">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="500" height="50" topLeftX="140" topLeftY="316" presetHandlers="0" type="rect" id="bKM">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="500" height="50" topLeftX="140" topLeftY="316" type="text" id="bKF">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p><strong>持久层 DAO　</strong>Spring JDBC · JdbcTemplate，SQL 透明、易讲解，不引入 ORM</p>
+        </content>
+      </shape>
+      <line id="bKj" startX="390" startY="366" endX="390" endY="380.0356688476182">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="500" height="50" topLeftX="140" topLeftY="380" presetHandlers="0" type="rect" id="bKD">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 48, 135, 1)"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="500" height="50" topLeftX="140" topLeftY="380" type="text" id="bKb">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p><strong>存储层 MySQL 8.0　</strong>user / course / note / note_segment 等 8 张表，utf8mb4</p>
+        </content>
+      </shape>
+      <shape width="208" height="114" topLeftX="688" topLeftY="252" presetHandlers="0" type="rect" id="bKW">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="184" height="104" topLeftX="700" topLeftY="258" type="text" id="bKm">
+        <content verticalAlign="top" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.35">
+          <p><strong><span color="rgba(0, 28, 84, 1)">AI 整理服务（旁支）</span></strong></p>
+          <p>LlmAiAdapter 走 OpenAI 兼容接口优先；未配置密钥或调用失败，自动回退 RuleAiOrganizer 规则引擎；来源写入 ai_log。</p>
+        </content>
+      </shape>
+      <shape width="208" height="50" topLeftX="688" topLeftY="380" presetHandlers="0" type="rect" id="bKl">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="184" height="50" topLeftX="700" topLeftY="380" type="text" id="bKe">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="center">
+          <p><strong><span color="rgba(0, 28, 84, 1)">本地文件存储</span></strong>　图片/音频落盘 ./uploads，由 /uploads/** 映射提供</p>
+        </content>
+      </shape>
+      <shape width="832" height="20" topLeftX="64" topLeftY="444" type="text" id="bKd">
+        <content textType="caption" fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>图 1 · 请求自上而下贯穿五层，返回 JSON 由前端渲染；AI 服务与文件存储作为服务层的两个协作旁支。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bKy">
+      <content>
+        <p>系统采用经典五层结构：最上层是六个静态 HTML 页面，通过 fetch 发 AJAX 请求；进入五个 Spring Boot 控制器；由 service 层处理业务和 AI 编排；再通过 JdbcTemplate 访问 MySQL。右侧两个旁支是 AI 整理服务和本地文件存储。选用 JdbcTemplate 而非 ORM，是为了 SQL 透明、便于答辩讲解。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppM">
+    <style>
+      <fill id="fpM">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bxo">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>02　总体架构与技术选型</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bxm">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>技术选型以稳定、透明、可离线演示为原则</p>
+        </content>
+      </shape>
+      <line id="bxa" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <table id="bxp" width="832" height="266" topLeftX="64" topLeftY="126">
+        <colgroup>
+          <col span="1" width="148"/>
+          <col span="1" width="332"/>
+          <col span="1" width="352"/>
+        </colgroup>
+        <tr height="28">
+          <td id="bxO">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>层次 / 组件</p>
+            </content>
+          </td>
+          <td id="bxt">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>选型</p>
+            </content>
+          </td>
+          <td id="bxg">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>选型理由</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxT">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>后端框架</p>
+            </content>
+          </td>
+          <td id="bxH">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>Spring Boot 2.7.18，内嵌 Tomcat 9（javax.servlet）</p>
+            </content>
+          </td>
+          <td id="bxf">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>起步快、内嵌容器、生态成熟，适合课程规模项目</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxY">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>数据访问</p>
+            </content>
+          </td>
+          <td id="bxM">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>Spring JDBC · JdbcTemplate</p>
+            </content>
+          </td>
+          <td id="bxq">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>SQL 直接可控、无 ORM 黑盒，便于讲解与排错</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxN">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>认证安全</p>
+            </content>
+          </td>
+          <td id="bxJ">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>BCryptPasswordEncoder + HttpSession + 登录拦截器</p>
+            </content>
+          </td>
+          <td id="bxW">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>密码哈希不落明文；白名单放行只读接口，写操作校验登录态</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxl">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>数据库</p>
+            </content>
+          </td>
+          <td id="bxr">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>MySQL 8.0，utf8mb4 / utf8mb4_0900_ai_ci / InnoDB</p>
+            </content>
+          </td>
+          <td id="bxv">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>完整支持中文，外键与联合唯一索引保证数据一致性</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxZ">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>前端</p>
+            </content>
+          </td>
+          <td id="bxi">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>纯 HTML + CSS + 原生 JavaScript（fetch / FormData）</p>
+            </content>
+          </td>
+          <td id="bxU">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>无构建链，静态资源由 Spring Boot 直接托管，共 6 个页面</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxz">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>AI 层</p>
+            </content>
+          </td>
+          <td id="bxV">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>LLM 适配器 + 规则引擎自动回退</p>
+            </content>
+          </td>
+          <td id="bxu">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>预留 OpenAI 兼容接口；无密钥或失败时离线规则引擎兜底</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="34">
+          <td id="bxA">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>文件存储</p>
+            </content>
+          </td>
+          <td id="bxR">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>本地 ./uploads 目录 + /uploads/** 静态映射</p>
+            </content>
+          </td>
+          <td id="bxF">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>图片、音频统一落盘，扩展名白名单限制上传类型</p>
+            </content>
+          </td>
+        </tr>
+      </table>
+      <shape width="832" height="40" topLeftX="64" topLeftY="404" type="text" id="bxI">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.4">
+          <p>开发工具：IntelliJ IDEA 2025.3.4（内置 Maven 构建）、MySQL 8.0 Command Line Client、Navicat Premium 16（库表可视化管理与数据核对）。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bxs">
+      <content>
+        <p>选型上坚持三点：稳定、透明、可离线演示。后端用 Spring Boot 2.7.18，数据访问用 JdbcTemplate 直接写 SQL；认证用 BCrypt 加 Session；前端不引入框架，纯静态 HTML 加原生 fetch；AI 层做了适配器抽象，默认规则引擎离线运行，配置密钥即可切换真实大模型。开发使用 IDEA、MySQL 命令行和 Navicat。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppX">
+    <style>
+      <fill id="fpX">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bwC">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>03　核心功能实现 · 功能一</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bwS">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>多格式笔记经五步自动整理，先出摘要再供读者选择精读</p>
+        </content>
+      </shape>
+      <line id="bhg" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="34" height="26" topLeftX="64" topLeftY="124" type="text" id="bhB">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>1</p>
+        </content>
+      </shape>
+      <shape width="440" height="22" topLeftX="104" topLeftY="122" type="text" id="bwh">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>发布多格式笔记</p>
+        </content>
+      </shape>
+      <shape width="440" height="32" topLeftX="104" topLeftY="146" type="text" id="bwj">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.3">
+          <p>选择课程，按顺序插入文字段、图片、音频片段，类型 TEXT / IMAGE / AUDIO。</p>
+        </content>
+      </shape>
+      <shape width="34" height="26" topLeftX="64" topLeftY="184" type="text" id="bwD">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>2</p>
+        </content>
+      </shape>
+      <shape width="440" height="22" topLeftX="104" topLeftY="182" type="text" id="bhY">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>抽取纯文本作为整理输入</p>
+        </content>
+      </shape>
+      <shape width="440" height="32" topLeftX="104" topLeftY="206" type="text" id="bhE">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.3">
+          <p>汇总 note_segment 中全部 TEXT 片段正文，图片与音频不参与文本打分。</p>
+        </content>
+      </shape>
+      <shape width="34" height="26" topLeftX="64" topLeftY="244" type="text" id="bww">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>3</p>
+        </content>
+      </shape>
+      <shape width="440" height="22" topLeftX="104" topLeftY="242" type="text" id="bwn">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>选择整理引擎</p>
+        </content>
+      </shape>
+      <shape width="440" height="32" topLeftX="104" topLeftY="266" type="text" id="bwe">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.3">
+          <p>启用且 API Key 有效时调用 LLM；未配置或失败，自动回退规则引擎。</p>
+        </content>
+      </shape>
+      <shape width="34" height="26" topLeftX="64" topLeftY="304" type="text" id="bwd">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>4</p>
+        </content>
+      </shape>
+      <shape width="440" height="22" topLeftX="104" topLeftY="302" type="text" id="bhJ">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>规则引擎完成整理</p>
+        </content>
+      </shape>
+      <shape width="440" height="32" topLeftX="104" topLeftY="326" type="text" id="bho">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.3">
+          <p>中文分句、词频统计提取关键词、按位置与特征打分生成摘要、抽取要点句。</p>
+        </content>
+      </shape>
+      <shape width="34" height="26" topLeftX="64" topLeftY="364" type="text" id="bwK">
+        <content fontSize="18" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" bold="true" wrap="false">
+          <p>5</p>
+        </content>
+      </shape>
+      <shape width="440" height="22" topLeftX="104" topLeftY="362" type="text" id="bwc">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>结果回写并在详情页呈现</p>
+        </content>
+      </shape>
+      <shape width="440" height="32" topLeftX="104" topLeftY="386" type="text" id="bwG">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.3">
+          <p>摘要、关键词、要点写回 note 表，详情页顶部先展示，读者据此选择精读。</p>
+        </content>
+      </shape>
+      <shape width="312" height="288" topLeftX="584" topLeftY="124" presetHandlers="0" type="rect" id="bwQ">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="280" height="24" topLeftX="600" topLeftY="134" type="text" id="bhv">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>整理产出与多格式渲染</p>
+        </content>
+      </shape>
+      <line id="bhP" startX="600" startY="164" endX="880.0017857085916" endY="164">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="284" height="230" topLeftX="600" topLeftY="172" type="text" id="bwx">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p><strong><span color="rgba(0, 28, 84, 1)">摘要 summary</span></strong>　概括全文要点，帮助快速判断是否阅读。</p>
+          <p><strong><span color="rgba(0, 28, 84, 1)">关键词 ai_keywords</span></strong>　逗号分隔，用于主题标签与检索。</p>
+          <p><strong><span color="rgba(0, 28, 84, 1)">要点 ai_points</span></strong>　换行分条，结构化呈现核心结论。</p>
+          <p><strong><span color="rgba(0, 28, 84, 1)">片段渲染</span></strong>　详情页按 seq 顺序渲染文字、图片与音频播放器。</p>
+          <p><strong><span color="rgba(0, 28, 84, 1)">引擎留痕</span></strong>　每次整理在 ai_log 记录来源 LLM 或 RULE。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bwk">
+      <content>
+        <p>功能一对应 AI 整理。发布时笔记由文字、图片、音频片段按顺序组成；服务层先抽出全部文字，再决定用大模型还是规则引擎。规则引擎做分句、词频关键词、关键句打分摘要和要点抽取。结果包括摘要、关键词、要点三项，回写后显示在详情页顶部，让读者先看摘要决定是否精读；每次整理的引擎来源记录在 ai_log。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppP">
+    <style>
+      <fill id="fpP">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bhw">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>03　核心功能实现 · 功能二</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bhj">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>贴吧式补充：原作保持不变，主楼层与楼中楼两级协作</p>
+        </content>
+      </shape>
+      <line id="bhD" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="400" height="44" topLeftX="80" topLeftY="130" presetHandlers="0" type="rect" id="bhL">
+        <fill>
+          <fillColor color="rgba(0, 48, 135, 1)"/>
+        </fill>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="400" height="44" topLeftX="80" topLeftY="130" type="text" id="bxB">
+        <content fontSize="13" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="center">
+          <p>原笔记 note（正文与多格式片段保持只读，不被补充改写）</p>
+        </content>
+      </shape>
+      <line id="bhh" startX="280" startY="174" endX="280" endY="206.01562118716424">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="190" height="46" topLeftX="80" topLeftY="210" presetHandlers="0" type="rect" id="bhk">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="190" height="46" topLeftX="80" topLeftY="210" type="text" id="bhC">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p>主楼层补充 A<br/>parent_id = 0</p>
+        </content>
+      </shape>
+      <shape width="190" height="46" topLeftX="290" topLeftY="210" presetHandlers="0" type="rect" id="bhS">
+        <fill>
+          <fillColor color="rgba(212, 229, 247, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="190" height="46" topLeftX="290" topLeftY="210" type="text" id="bxP">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" textAlign="center">
+          <p>主楼层补充 B<br/>parent_id = 0</p>
+        </content>
+      </shape>
+      <line id="bhx" startX="175" startY="256" endX="175" endY="284.0178514522438">
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <endArrow type="arrow"/>
+      </line>
+      <shape width="158" height="40" topLeftX="96" topLeftY="288" presetHandlers="0" type="rect" id="bhc">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="158" height="40" topLeftX="96" topLeftY="288" type="text" id="bhG">
+        <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="center">
+          <p>楼中楼 A-1<br/>parent_id = A.id</p>
+        </content>
+      </shape>
+      <shape width="158" height="40" topLeftX="266" topLeftY="288" presetHandlers="0" type="rect" id="bhQ">
+        <fill>
+          <fillColor color="rgba(255, 255, 255, 1)"/>
+        </fill>
+        <border color="rgba(0, 112, 186, 1)" width="1"/>
+        <content fontSize="16" fontFamily="思源黑体" color="rgba(31, 35, 41, 1)"/>
+      </shape>
+      <shape width="158" height="40" topLeftX="266" topLeftY="288" type="text" id="bhK">
+        <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="center">
+          <p>楼中楼 A-2<br/>parent_id = A.id</p>
+        </content>
+      </shape>
+      <shape width="400" height="20" topLeftX="80" topLeftY="342" type="text" id="bhn">
+        <content textType="caption" fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p>图 2 · contribution 表两级结构，补充记录均挂在 note_id 之下。</p>
+        </content>
+      </shape>
+      <shape width="356" height="24" topLeftX="540" topLeftY="130" type="text" id="bhe">
+        <content fontSize="15" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>协作补充规则与接口</p>
+        </content>
+      </shape>
+      <line id="bhd" startX="540" startY="160" endX="896.0014044916114" endY="160">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="356" height="250" topLeftX="540" topLeftY="168" type="text" id="bhb">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" list="bullet" listStyle="circle-hollow-square">
+          <ul>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">独立挂载：</span></strong>补充记录 note_id，不修改原笔记正文与片段。</p>
+            </li>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">两级层级：</span></strong>主楼层 parent_id=0；楼中楼 parent_id 指向父补充 id。</p>
+            </li>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">点赞去重：</span></strong>contribution_like(contribution_id, user_id) 联合唯一，同一用户不可重复赞。</p>
+            </li>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">读取接口：</span></strong>GET /api/notes/{id}/contributions 按时间与点赞返回楼层。</p>
+            </li>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">写入接口：</span></strong>POST 发主楼层或回复；POST /api/contributions/{id}/like 切换点赞。</p>
+            </li>
+            <li>
+              <p><strong><span color="rgba(0, 28, 84, 1)">展示方式：</span></strong>详情页底部以楼层编号呈现原作补充与回复，支持点赞计数。</p>
+            </li>
+          </ul>
+        </content>
+      </shape>
+    </data>
+    <note id="bxE">
+      <content>
+        <p>功能二是贴吧式共享补充。设计上保证原作不被改写：所有补充都存在 contribution 表并挂到 note_id 下。主楼层 parent_id 为 0，回复某条补充形成楼中楼，parent_id 指向父记录。补充点赞用联合唯一索引防止重复。前端在详情页底部按楼层展示，登录用户可发帖、回复和点赞。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppQ">
+    <style>
+      <fill id="fpQ">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bhW">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>03　核心功能实现 · 功能三</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bhI">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>课程分类过滤叠加三种排序，阅读量与点赞量驱动推荐</p>
+        </content>
+      </shape>
+      <line id="bhi" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="600" height="22" topLeftX="64" topLeftY="120" type="text" id="bhO">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>列表接口 GET /api/notes?courseId=&amp;sort=&amp;keyword= 的三种排序</p>
+        </content>
+      </shape>
+      <table id="bhr" width="832" height="138" topLeftX="64" topLeftY="148">
+        <colgroup>
+          <col span="1" width="150"/>
+          <col span="1" width="216"/>
+          <col span="1" width="246"/>
+          <col span="1" width="220"/>
+        </colgroup>
+        <tr height="28">
+          <td id="bhH">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>排序参数 sort</p>
+            </content>
+          </td>
+          <td id="bhV">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>推荐含义</p>
+            </content>
+          </td>
+          <td id="bhf">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>排序依据（SQL ORDER BY）</p>
+            </content>
+          </td>
+          <td id="bhA">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="12" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>对应需求</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="36">
+          <td id="bhX">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>newest</p>
+            </content>
+          </td>
+          <td id="bhT">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>最新发布优先（默认）</p>
+            </content>
+          </td>
+          <td id="bhF">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note.created_at DESC</p>
+            </content>
+          </td>
+          <td id="bhq">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>默认浏览</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="36">
+          <td id="bhu">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>views</p>
+            </content>
+          </td>
+          <td id="bhN">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>阅读量从高到低推荐</p>
+            </content>
+          </td>
+          <td id="bhs">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note.view_count DESC</p>
+            </content>
+          </td>
+          <td id="bhR">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>按阅读量高低</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="38">
+          <td id="bhM">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>likes</p>
+            </content>
+          </td>
+          <td id="bhm">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>点赞量从高到低推荐</p>
+            </content>
+          </td>
+          <td id="bhl">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note.like_count DESC</p>
+            </content>
+          </td>
+          <td id="bha">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)">
+              <p>按点赞量高低</p>
+            </content>
+          </td>
+        </tr>
+      </table>
+      <shape width="400" height="22" topLeftX="64" topLeftY="306" type="text" id="bht">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>筛选条件组合</p>
+        </content>
+      </shape>
+      <shape width="400" height="120" topLeftX="64" topLeftY="332" type="text" id="bhU">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" list="bullet" listStyle="circle-hollow-square">
+          <ul>
+            <li>
+              <p>courseId：课程字典下拉过滤，只展示所选课程的笔记。</p>
+            </li>
+            <li>
+              <p>keyword：在标题、摘要、关键词字段做模糊匹配。</p>
+            </li>
+            <li>
+              <p>可见性：仅返回 share_status=1 的公开笔记，私有笔记非作者返回 403。</p>
+            </li>
+          </ul>
+        </content>
+      </shape>
+      <line id="bhy" startX="485.99999999999994" startY="306" endX="485.99999999999994" endY="452.0034246173699">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="384" height="22" topLeftX="512" topLeftY="306" type="text" id="bhZ">
+        <content fontSize="14" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>计数与去重机制</p>
+        </content>
+      </shape>
+      <shape width="384" height="120" topLeftX="512" topLeftY="332" type="text" id="bhz">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" list="bullet" listStyle="circle-hollow-square">
+          <ul>
+            <li>
+              <p>打开笔记详情时 view_count 加 1，作为阅读量排序依据。</p>
+            </li>
+            <li>
+              <p>note_like(note_id, user_id) 联合唯一，保证同一用户对同一笔记只赞一次。</p>
+            </li>
+            <li>
+              <p>点赞成功后回写 note.like_count；取消点赞同步递减，供 likes 排序使用。</p>
+            </li>
+          </ul>
+        </content>
+      </shape>
+    </data>
+    <note id="bhp">
+      <content>
+        <p>功能三是筛选阅读与推荐。前端列表把课程下拉、关键词框和三种排序传到同一个列表接口。排序默认最新，views 按阅读量降序，likes 按点赞量降序。阅读量在打开详情时加一；点赞通过联合唯一索引防重复，并回写计数字段用于排序。私有笔记只对作者可见，保证隐私。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppV">
+    <style>
+      <fill id="fpV">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bwu">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>04　数据库设计</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bwU">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>八张表：主表承载整理结果，子表分别支撑片段、点赞与补充</p>
+        </content>
+      </shape>
+      <line id="bwB" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <table id="bwa" width="832" height="266" topLeftX="64" topLeftY="122">
+        <colgroup>
+          <col span="1" width="168"/>
+          <col span="1" width="248"/>
+          <col span="1" width="416"/>
+        </colgroup>
+        <tr height="26">
+          <td id="bwE">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true">
+              <p>数据表</p>
+            </content>
+          </td>
+          <td id="bnk">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>职责</p>
+            </content>
+          </td>
+          <td id="bwO">
+            <fill>
+              <fillColor color="rgba(0, 48, 135, 1)"/>
+            </fill>
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(255, 255, 255, 1)" bold="true" textAlign="left">
+              <p>关键字段与约束</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bws">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>user</p>
+            </content>
+          </td>
+          <td id="bwo">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>用户注册与登录</p>
+            </content>
+          </td>
+          <td id="bnj">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>username 唯一；password_hash 存 BCrypt；nickname</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bwH">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>course</p>
+            </content>
+          </td>
+          <td id="bwp">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>课程分类字典（6 门）</p>
+            </content>
+          </td>
+          <td id="bwP">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>id、name，启动时幂等补齐种子数据</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bnn">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>note</p>
+            </content>
+          </td>
+          <td id="bwq">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>笔记主表与 AI 整理结果</p>
+            </content>
+          </td>
+          <td id="bwt">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>author_id、course_id、share_status、view_count、like_count、summary、ai_keywords、ai_points</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bwg">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>note_segment</p>
+            </content>
+          </td>
+          <td id="bnc">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>文字/图片/音频多格式片段</p>
+            </content>
+          </td>
+          <td id="bwl">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note_id、seq 排序、kind=TEXT/IMAGE/AUDIO、text_content、file_path</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bwf">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>note_like</p>
+            </content>
+          </td>
+          <td id="bwY">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>笔记点赞记录</p>
+            </content>
+          </td>
+          <td id="bnh">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>联合唯一索引 (note_id, user_id) 防重复点赞</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bnw">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>contribution</p>
+            </content>
+          </td>
+          <td id="bwi">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>贴吧补充：主楼层与楼中楼</p>
+            </content>
+          </td>
+          <td id="bwN">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note_id、author_id、parent_id（0 为主楼层）、content、like_count</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bwJ">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>contribution_like</p>
+            </content>
+          </td>
+          <td id="bnK">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>补充内容点赞记录</p>
+            </content>
+          </td>
+          <td id="bwV">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>联合唯一索引 (contribution_id, user_id)</p>
+            </content>
+          </td>
+        </tr>
+        <tr height="30">
+          <td id="bwr">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true">
+              <p>ai_log</p>
+            </content>
+          </td>
+          <td id="bwv">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>AI 整理引擎留痕</p>
+            </content>
+          </td>
+          <td id="bnx">
+            <content fontSize="11" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" textAlign="left">
+              <p>note_id、engine=LLM/RULE、created_at、整理摘要明细</p>
+            </content>
+          </td>
+        </tr>
+      </table>
+      <shape width="832" height="52" topLeftX="64" topLeftY="398" type="text" id="bwA">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.4">
+          <p>关系约束：note.author_id 关联 user；note_segment、note_like、contribution 均关联 note；两张点赞表用联合唯一索引保证一人一赞；删除笔记时应用层级联清理片段、补充、点赞与整理日志。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bwF">
+      <content>
+        <p>数据库共八张表。user 和 course 是基础表；note 是主表，除了基本字段还保存摘要、关键词、要点三个 AI 字段；note_segment 用 kind 和 seq 支撑多格式片段排序；两张点赞表用联合唯一索引防重复；contribution 用 parent_id 区分主楼层和楼中楼；ai_log 记录每次整理由大模型还是规则引擎完成。</p>
+      </content>
+    </note>
+  </slide>
+  <slide id="ppt">
+    <style>
+      <fill id="fpt">
+        <fillColor color="rgba(255, 255, 255, 1)"/>
+      </fill>
+    </style>
+    <data>
+      <shape width="500" height="22" topLeftX="64" topLeftY="40" type="text" id="bwy">
+        <content textType="caption" fontSize="12" fontFamily="思源黑体" color="rgba(0, 112, 186, 1)" wrap="false">
+          <p>05　测试部署与总结</p>
+        </content>
+      </shape>
+      <shape width="832" height="32" topLeftX="64" topLeftY="62" type="text" id="bwR">
+        <content textType="headline" fontSize="25" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>测试覆盖核心链路，四步完成本地启动与演示</p>
+        </content>
+      </shape>
+      <line id="bwZ" startX="64" startY="106" endX="896.0006009613214" endY="106">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="400" height="22" topLeftX="64" topLeftY="124" type="text" id="bwM">
+        <content fontSize="15" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>功能测试覆盖</p>
+        </content>
+      </shape>
+      <shape width="404" height="210" topLeftX="64" topLeftY="152" type="text" id="bwI">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.45" list="bullet" listStyle="circle-hollow-square">
+          <ul>
+            <li>
+              <p>注册登录：BCrypt 校验密码，Session 维持登录态，退出即清除。</p>
+            </li>
+            <li>
+              <p>发布笔记：文字/图片/音频片段按 seq 落库，扩展名白名单校验。</p>
+            </li>
+            <li>
+              <p>AI 整理：默认规则引擎产出摘要、关键词、要点；配密钥可切 LLM，失败自动回退。</p>
+            </li>
+            <li>
+              <p>详情与点赞：进入详情阅读量加一；联合唯一约束下点赞不可重复。</p>
+            </li>
+            <li>
+              <p>贴吧补充：主楼层与楼中楼层级正确，补充点赞计数生效。</p>
+            </li>
+            <li>
+              <p>列表推荐：课程过滤、关键词检索、views / likes / newest 排序结果正确。</p>
+            </li>
+          </ul>
+        </content>
+      </shape>
+      <line id="bwb" startX="492.00000000000006" startY="124" endX="492.00000000000006" endY="362.00210083106407">
+        <border color="rgba(210, 220, 230, 1)" width="1"/>
+      </line>
+      <shape width="380" height="22" topLeftX="516" topLeftY="124" type="text" id="bwX">
+        <content fontSize="15" fontFamily="思源黑体" color="rgba(0, 28, 84, 1)" bold="true" wrap="false">
+          <p>部署启动四步</p>
+        </content>
+      </shape>
+      <shape width="380" height="210" topLeftX="516" topLeftY="152" type="text" id="bwW">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)">
+          <p><strong><span color="rgba(0, 112, 186, 1)">1　</span></strong>执行 sql/schema.sql 建库建表；data.sql 可选，启动时自动补齐课程。</p>
+          <p><strong><span color="rgba(0, 112, 186, 1)">2　</span></strong>修改 application.yml 中 spring.datasource.password 为本机 MySQL root 密码。</p>
+          <p><strong><span color="rgba(0, 112, 186, 1)">3　</span></strong>IDEA 使用内置 Maven 构建并运行启动类 ZhMindNotesApplication，端口 8080。</p>
+          <p><strong><span color="rgba(0, 112, 186, 1)">4　</span></strong>浏览器打开 index.html；演示账号 admin、student，密码均为 123456。</p>
+        </content>
+      </shape>
+      <line id="bwT" startX="64" startY="374" endX="896.0006009613214" endY="374">
+        <border color="rgba(0, 48, 135, 1)" width="1"/>
+      </line>
+      <shape width="404" height="80" topLeftX="64" topLeftY="384" type="text" id="bwm">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.45">
+          <p><strong><span color="rgba(0, 28, 84, 1)">已完成</span></strong>　三大核心需求全部实现，并补齐注册登录、点赞计数、公开/私有分享与演示种子数据；前后端路由、数据表与接口经静态一致性校验。</p>
+        </content>
+      </shape>
+      <shape width="404" height="80" topLeftX="492" topLeftY="384" type="text" id="bwz">
+        <content fontSize="12" fontFamily="思源黑体" color="rgba(71, 85, 105, 1)" lineSpacing="multiple:1.45">
+          <p><strong><span color="rgba(0, 28, 84, 1)">改进方向</span></strong>　接入真实大模型提升摘要质量；阅读量增加会话级节流避免刷新重复计数；后续补充分页、收藏、补充排序与前端交互细化。</p>
+        </content>
+      </shape>
+    </data>
+    <note id="bwL">
+      <content>
+        <p>最后是测试、部署与总结。测试覆盖注册登录、多格式发布、AI 整理、阅读点赞、贴吧补充和列表排序六条主线。本地启动只需建库、改数据库密码、用 IDEA 内置 Maven 运行、打开首页四步，演示账号 admin 和 student 密码都是 123456。系统已完成三项核心需求；后续可接入真实大模型、优化阅读量统计并增加分页、收藏等功能。</p>
+      </content>
+    </note>
+  </slide>
+</presentation>

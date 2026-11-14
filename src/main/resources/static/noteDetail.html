@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔记详情 · 智记 MindNotes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container">
+    <div class="detail-layout">
+        <!-- 主栏：正文片段 -->
+        <div class="card detail-head" id="mainCard">
+            <span class="badge" id="dCourse"></span>
+            <span class="badge green" id="dShare"></span>
+            <h1 id="dTitle"></h1>
+            <div class="detail-meta">
+                <span>作者：<b id="dAuthor"></b></span>
+                <span>发布于 <span id="dTime"></span></span>
+                <span>阅读 <b id="dViews">0</b></span>
+                <span>点赞 <b id="dLikes">0</b></span>
+            </div>
+            <div style="margin:14px 0;display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn small" id="btnLike">点赞</button>
+                <button class="btn ghost small" id="btnOrganize" style="display:none">重新 AI 整理</button>
+                <a class="btn ghost small" href="index.html">返回首页</a>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--line);margin:8px 0 4px">
+            <div id="segments"></div>
+        </div>
+
+        <!-- 侧栏：AI 整理结果 -->
+        <aside class="card ai-card">
+            <h3>AI 整理结果 <span class="ai-engine-tag" id="aiEngine"></span></h3>
+            <div class="ai-section">
+                <div class="label">一句话摘要（便于快速选择阅读）</div>
+                <div id="aiSummary" class="ai-summary"></div>
+            </div>
+            <div class="ai-section">
+                <div class="label">关键词</div>
+                <div id="aiKeywords"></div>
+            </div>
+            <div class="ai-section">
+                <div class="label">结构化要点</div>
+                <ol class="ai-points" id="aiPoints"></ol>
+            </div>
+            <p class="muted" style="font-size:12px">未配置大模型密钥时，由内置规则引擎离线整理；在 application.yml 配置 ai.enabled/api-key 后可切换真实大模型。</p>
+        </aside>
+    </div>
+
+    <!-- 贴吧式共享补充 -->
+    <section class="forum">
+        <h3>共享补充 · 大家一起完善这篇笔记</h3>
+        <div class="card publish-box" id="publishBox">
+            <label>写下你的补充（文字、图片或音频均可）</label>
+            <textarea id="cbContent" placeholder="补充重点、易错点、例题或自己的理解……"></textarea>
+            <div class="publish-actions">
+                <select id="cbMediaType" style="width:auto">
+                    <option value="TEXT">纯文字补充</option>
+                    <option value="IMAGE">附图片</option>
+                    <option value="AUDIO">附音频</option>
+                </select>
+                <input type="file" id="cbFile" style="display:none">
+                <button class="btn ghost small" id="cbPickFile">选择文件</button>
+                <span class="selected-file" id="cbFileName"></span>
+                <span style="flex:1"></span>
+                <button class="btn small" id="btnSubmitContrib">发表补充</button>
+            </div>
+        </div>
+        <div id="loginTip" class="muted" style="display:none;margin:8px 0">请先<a href="login.html">登录</a>后发表补充与点赞。</div>
+        <div id="floorList"></div>
+    </section>
+</div>
+<script src="js/common.js"></script>
+<script>
+let NOTE = null;
+let pendingMedia = { url: '', type: 'TEXT' };
+
+async function loadNote() {
+    const id = getQuery('id');
+    try {
+        NOTE = await apiGet('/api/notes/' + id);
+    } catch (e) {
+        document.getElementById('mainCard').innerHTML = `<p class="empty-state">${esc(e.message)}</p>`;
+        return;
+    }
+    document.title = NOTE.title + ' · 智记 MindNotes';
+    document.getElementById('dCourse').textContent = NOTE.courseName;
+    document.getElementById('dShare').textContent = NOTE.shareStatus === 1 ? '公开共享中' : '私有笔记';
+    document.getElementById('dTitle').textContent = NOTE.title;
+    document.getElementById('dAuthor').textContent = NOTE.authorName;
+    document.getElementById('dTime').textContent = fmtTime(NOTE.createdAt);
+    document.getElementById('dViews').textContent = NOTE.viewCount;
+    document.getElementById('dLikes').textContent = NOTE.likeCount;
+    renderLikeBtn();
+    document.getElementById('segments').innerHTML = renderSegments(NOTE.segments);
+    renderAi();
+    if (APP.me && APP.me.id === NOTE.userId) {
+        document.getElementById('btnOrganize').style.display = 'inline-block';
+    }
+}
+
+function renderAi() {
+    document.getElementById('aiEngine').textContent = NOTE.aiEngine === 'LLM' ? '大模型 API' : '规则引擎（离线）';
+    document.getElementById('aiSummary').textContent = NOTE.aiSummary || '暂无摘要';
+    document.getElementById('aiKeywords').innerHTML = (NOTE.aiKeywords || '').split(',').filter(Boolean)
+        .map(k => `<span class="tag">${esc(k)}</span>`).join('') || '<span class="muted">暂无关键词</span>';
+    const points = (NOTE.aiPoints || '').split('\n').filter(Boolean);
+    document.getElementById('aiPoints').innerHTML = points.map(p => `<li>${esc(p)}</li>`).join('')
+        || '<li class="muted">暂无要点</li>';
+}
+
+function renderLikeBtn() {
+    document.getElementById('btnLike').textContent = NOTE.liked ? '取消点赞' : '点赞';
+}
+
+document.getElementById('btnLike').onclick = async () => {
+    if (!requireLogin()) return;
+    const r = await apiPost(`/api/notes/${NOTE.id}/like`);
+    NOTE.liked = r.liked;
+    document.getElementById('dLikes').textContent = r.likeCount;
+    renderLikeBtn();
+};
+
+document.getElementById('btnOrganize').onclick = async () => {
+    const n = await apiPost(`/api/notes/${NOTE.id}/organize`);
+    NOTE.aiSummary = n.aiSummary; NOTE.aiKeywords = n.aiKeywords;
+    NOTE.aiPoints = n.aiPoints; NOTE.aiEngine = n.aiEngine;
+    renderAi();
+    toast('已完成 AI 重新整理');
+};
+
+/* ---------------- 贴吧补充 ---------------- */
+async function loadContributions() {
+    const list = await apiGet(`/api/notes/${NOTE.id}/contributions`);
+    const wrap = document.getElementById('floorList');
+    if (!list.length) { wrap.innerHTML = '<p class="empty-state">还没有补充，来发表第一条吧。</p>'; return; }
+    wrap.innerHTML = list.map((c, i) => floorHtml(c, i + 1)).join('');
+    bindFloorActions(list);
+}
+
+function mediaHtml(c) {
+    if (c.mediaType === 'IMAGE' && c.mediaUrl)
+        return `<img class="preview-img" src="${esc(c.mediaUrl)}" style="margin-top:8px">`;
+    if (c.mediaType === 'AUDIO' && c.mediaUrl)
+        return `<div class="seg-audio"><audio controls src="${esc(c.mediaUrl)}" style="width:260px"></audio></div>`;
+    return '';
+}
+
+function floorHtml(c, no) {
+    const replies = (c.replies || []).map(r => `
+        <div class="reply">
+            <div class="meta"><b>${esc(r.authorName)}</b> · ${fmtTime(r.createdAt)} ·
+                <button class="link-btn" onclick="likeContrib(${r.id}, ${r.liked ? 1 : 0})">
+                    ${r.liked ? '已赞' : '点赞'} ${r.likeCount}
+                </button>
+            </div>
+            <div>${esc(r.content || '')} ${mediaHtml(r)}</div>
+        </div>`).join('');
+    return `<div class="floor">
+        <div class="floor-head"><span class="author">#${no} ${esc(c.authorName)}</span>
+            <span>${fmtTime(c.createdAt)}</span></div>
+        <div class="floor-body">${esc(c.content || '')} ${mediaHtml(c)}</div>
+        <div class="floor-actions">
+            <button class="link-btn" onclick="likeContrib(${c.id}, ${c.liked ? 1 : 0})">
+                ${c.liked ? '已赞' : '点赞'}（${c.likeCount}）
+            </button>
+            <button class="link-btn" onclick="toggleReply(${c.id})">回复</button>
+        </div>
+        <div class="replies">${replies}</div>
+        <div class="reply-box" id="replyBox${c.id}" style="display:none">
+            <textarea id="replyText${c.id}" placeholder="回复 ${esc(c.authorName)}……"></textarea>
+            <button class="btn small" onclick="submitReply(${c.id})">回复</button>
+        </div>
+    </div>`;
+}
+
+function bindFloorActions() {}
+
+window.toggleReply = id => {
+    const box = document.getElementById('replyBox' + id);
+    box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+};
+
+window.submitReply = async (parentId) => {
+    if (!requireLogin()) return;
+    const content = document.getElementById('replyText' + parentId).value.trim();
+    if (!content) { toast('回复内容不能为空'); return; }
+    await apiPost(`/api/notes/${NOTE.id}/contributions`, { parentId, content, mediaType: 'TEXT' });
+    toast('回复成功');
+    loadContributions();
+};
+
+window.likeContrib = async (id) => {
+    if (!requireLogin()) return;
+    await apiPost(`/api/contributions/${id}/like`);
+    loadContributions();
+};
+
+document.getElementById('cbMediaType').onchange = e => {
+    const t = e.target.value;
+    document.getElementById('cbFile').style.display = t === 'TEXT' ? 'none' : 'block';
+    document.getElementById('cbPickFile').style.display = t === 'TEXT' ? 'none' : 'inline-block';
+    pendingMedia = { url: '', type: t };
+};
+document.getElementById('cbPickFile').onclick = () => document.getElementById('cbFile').click();
+document.getElementById('cbFile').onchange = async e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    try {
+        const kind = document.getElementById('cbMediaType').value === 'IMAGE' ? 'image' : 'audio';
+        pendingMedia.url = await uploadMedia(f, kind);
+        pendingMedia.type = document.getElementById('cbMediaType').value;
+        document.getElementById('cbFileName').textContent = '已选择：' + f.name;
+    } catch (err) { toast(err.message); }
+};
+
+document.getElementById('btnSubmitContrib').onclick = async () => {
+    if (!requireLogin()) return;
+    const content = document.getElementById('cbContent').value.trim();
+    if (!content && !pendingMedia.url) { toast('请输入文字或选择媒体'); return; }
+    await apiPost(`/api/notes/${NOTE.id}/contributions`, {
+        content, mediaUrl: pendingMedia.url, mediaType: pendingMedia.type
+    });
+    toast('补充已发表');
+    document.getElementById('cbContent').value = '';
+    document.getElementById('cbFile').value = '';
+    document.getElementById('cbFileName').textContent = '';
+    pendingMedia = { url: '', type: 'TEXT' };
+    loadContributions();
+};
+
+boot(async () => {
+    await loadNote();
+    if (NOTE) {
+        if (APP.me) document.getElementById('loginTip').style.display = 'none';
+        else document.getElementById('loginTip').style.display = 'block';
+        document.getElementById('publishBox').style.display = APP.me ? 'block' : 'none';
+        await loadContributions();
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="118" width="600" height="28">
+      <content textType="caption" fontSize="13" color="rgb(0,112,186)" wrap="false">
+        <p>ZHI-MINDNOTES · 课程设计答辩汇报</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="160" width="832" height="64">
+      <content textType="title" fontSize="40" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>智记 MindNotes 学习笔记系统</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="238" width="832" height="34">
+      <content textType="sub-headline" fontSize="19" color="rgb(71,85,105)">
+        <p>AI 自动整理摘要 · 贴吧式共享补充 · 课程分类与阅读量/点赞量排序推荐</p>
+      </content>
+    </shape>
+    <line startX="64" startY="304" endX="280" endY="304">
+      <border color="rgb(0,48,135)" width="2"/>
+    </line>
+    <shape type="text" topLeftX="64" topLeftY="326" width="832" height="28">
+      <content textType="body" fontSize="14" color="rgb(0,112,186)">
+        <p>技术栈：Java（Spring Boot 2.7.18）+ MySQL 8.0 + 静态 HTML / CSS / 原生 JavaScript（fetch AJAX）</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="392" width="832" height="26">
+      <content textType="caption" fontSize="13" color="rgb(71,85,105)">
+        <p>作者：董利研　｜　开发工具：IntelliJ IDEA 2025.3.4、MySQL 8.0、Navicat Premium 16　｜　2026 年 11 月</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>各位老师好，本次汇报的项目是智记 MindNotes 学习笔记系统。系统围绕三个核心目标：用 AI 自动整理笔记并生成摘要便于快速选择阅读；以贴吧形式支持同伴在原作基础上补充；按课程分类并按阅读量、点赞量排序推荐。技术上采用 Spring Boot、MySQL 与静态 HTML 实现。</p>
+    </content>
+  </note>
+</slide>

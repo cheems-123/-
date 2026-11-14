@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智记 MindNotes · 首页推荐</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="siteNav"></header>
+<div class="container">
+    <div class="toolbar">
+        <div class="chips" id="courseChips"></div>
+        <div class="sort-tabs">
+            <div class="sort-tab active" data-sort="newest">最新发布</div>
+            <div class="sort-tab" data-sort="views">阅读量高</div>
+            <div class="sort-tab" data-sort="likes">点赞高</div>
+        </div>
+        <div class="search-box">
+            <input id="kwInput" placeholder="搜索标题 / 摘要 / 关键词">
+            <button class="btn small" id="btnSearch">搜索</button>
+        </div>
+    </div>
+    <div class="grid" id="noteList"></div>
+    <div class="empty-state" id="emptyBox" style="display:none">暂无符合条件的笔记，去 <a href="publish.html">发布第一篇笔记</a> 吧。</div>
+</div>
+<script src="js/common.js"></script>
+<script>
+const state = { courseId: null, sort: 'newest', keyword: '' };
+
+async function loadCourses() {
+    const courses = await apiGet('/api/courses');
+    const box = document.getElementById('courseChips');
+    let html = `<span class="chip active" data-id="">全部课程</span>`;
+    courses.forEach(c => {
+        html += `<span class="chip" data-id="${c.id}">${esc(c.name)}</span>`;
+    });
+    box.innerHTML = html;
+    box.querySelectorAll('.chip').forEach(el => {
+        el.onclick = () => {
+            box.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+            el.classList.add('active');
+            state.courseId = el.dataset.id ? Number(el.dataset.id) : null;
+            loadNotes();
+        };
+    });
+}
+
+async function loadNotes() {
+    const params = new URLSearchParams();
+    if (state.courseId) params.set('courseId', state.courseId);
+    params.set('sort', state.sort);
+    if (state.keyword) params.set('keyword', state.keyword);
+    const list = await apiGet('/api/notes?' + params.toString());
+    const wrap = document.getElementById('noteList');
+    document.getElementById('emptyBox').style.display = list.length ? 'none' : 'block';
+    wrap.innerHTML = list.map(n => {
+        const tags = (n.aiKeywords || '').split(',').filter(Boolean)
+            .map(k => `<span class="tag">${esc(k)}</span>`).join('');
+        const summary = n.aiSummary
+            ? `<div class="ai-summary">AI 摘要：${esc(n.aiSummary)}</div>`
+            : `<div class="muted">发布后由 AI 自动生成摘要与关键词</div>`;
+        return `<div class="card note-card">
+            <div><span class="badge">${esc(n.courseName)}</span><span class="badge gray">作者：${esc(n.authorName)}</span></div>
+            <a class="note-title" href="noteDetail.html?id=${n.id}">${esc(n.title)}</a>
+            ${summary}
+            <div>${tags}</div>
+            <div class="card-meta">
+                <span>阅读 ${n.viewCount}</span><span>点赞 ${n.likeCount}</span>
+                <span class="spacer"></span><span>${fmtTime(n.createdAt)}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+document.querySelectorAll('.sort-tab').forEach(t => {
+    t.onclick = () => {
+        document.querySelectorAll('.sort-tab').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        state.sort = t.dataset.sort;
+        loadNotes();
+    };
+});
+document.getElementById('btnSearch').onclick = () => {
+    state.keyword = document.getElementById('kwInput').value.trim();
+    loadNotes();
+};
+document.getElementById('kwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { state.keyword = e.target.value.trim(); loadNotes(); }
+});
+
+boot(async () => { await loadCourses(); await loadNotes(); });
+</script>
+</body>
+</html>

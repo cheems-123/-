@@ -1,0 +1,51 @@
+<slide>
+  <style><fill><fillColor color="rgb(255,255,255)"/></fill></style>
+  <data>
+    <shape type="text" topLeftX="64" topLeftY="44" width="500" height="22">
+      <content textType="caption" fontSize="12" color="rgb(0,112,186)" wrap="false"><p>01　需求与目标</p></content>
+    </shape>
+    <shape type="text" topLeftX="64" topLeftY="66" width="832" height="34">
+      <content textType="headline" fontSize="26" bold="true" color="rgb(0,28,84)" wrap="false">
+        <p>三项核心需求落地为 SB-01～SB-06 六个看板任务</p>
+      </content>
+    </shape>
+    <line startX="64" startY="112" endX="896" endY="112"><border color="rgb(210,220,230)" width="1"/></line>
+
+    <table topLeftX="64" topLeftY="134" width="832" height="196">
+      <colgroup><col width="176"/><col width="446"/><col width="210"/></colgroup>
+      <tr height="30">
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="center"><p>核心需求</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="left"><p>功能要点</p></content></td>
+        <td><fill><fillColor color="rgba(0,48,135,1)"/></fill><content textType="body" fontSize="12" bold="true" color="rgba(255,255,255,1)" textAlign="center"><p>对应看板任务</p></content></td>
+      </tr>
+      <tr height="55">
+        <td><content textType="body" fontSize="12" bold="true" color="rgb(0,28,84)" textAlign="center"><p>① AI 笔记整理</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(71,85,105)" textAlign="left"><p>发布后自动生成摘要、关键词与要点，便于读者先看摘要再选择阅读；笔记由文字、图片、音频片段混合构成。</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(0,112,186)" textAlign="center"><p>SB-05</p></content></td>
+      </tr>
+      <tr height="55">
+        <td><content textType="body" fontSize="12" bold="true" color="rgb(0,28,84)" textAlign="center"><p>② 贴吧式共享补充</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(71,85,105)" textAlign="left"><p>笔记详情以楼层形式展示读者补充，支持主楼层跟帖与楼中楼回复，并可对补充内容点赞，在原作基础上协作完善。</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(0,112,186)" textAlign="center"><p>SB-04（扩展）</p></content></td>
+      </tr>
+      <tr height="56">
+        <td><content textType="body" fontSize="12" bold="true" color="rgb(0,28,84)" textAlign="center"><p>③ 分类筛选与排序</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(71,85,105)" textAlign="left"><p>笔记按课程分类，支持课程过滤与关键词检索；列表可按最新发布、阅读量高低、点赞量高低三种方式排序推荐。</p></content></td>
+        <td><content textType="body" fontSize="12" color="rgb(0,112,186)" textAlign="center"><p>SB-04</p></content></td>
+      </tr>
+    </table>
+
+    <line startX="64" startY="362" endX="896" endY="362"><border color="rgb(210,220,230)" width="1"/></line>
+    <shape type="text" topLeftX="64" topLeftY="374" width="832" height="60">
+      <content textType="body" fontSize="13" color="rgb(71,85,105)" lineSpacing="multiple:1.4">
+        <p>支撑性任务：SB-01 框架落地、数据库适配与种子数据；SB-02 用户注册登录；SB-03 笔记上传与我的笔记；SB-06 全模块联调测试与演示。</p>
+        <p>总体目标：在离线可演示的前提下实现三大核心功能，并预留大模型接口，具备后续接入真实 LLM 的扩展能力。</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body">
+      <p>题目提出三项核心需求：AI 整理摘要、贴吧式共享补充、按课程分类并按阅读量或点赞量排序。它们分别对应看板 SB-05、SB-04 扩展和 SB-04 浏览列表；其余 SB-01 到 SB-03、SB-06 是支撑性基础工作。系统在离线环境即可完整演示，同时预留大模型接口。</p>
+    </content>
+  </note>
+</slide>
