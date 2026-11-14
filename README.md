@@ -58,9 +58,9 @@ MySQL 8.0（库 zhi_mindnotes，utf8mb4 / InnoDB，8 张表）
 
 ### 方式 B：MySQL 8.0 Command Line Client
 ```sql
--- 登录后执行（替换为实际文件绝对路径，注意正斜杠）
-source C:/Users/27767/Doubao/chats/2026-11-03/new-chat-1/zhi-mindnotes/sql/schema.sql;
-source C:/Users/27767/Doubao/chats/2026-11-03/new-chat-1/zhi-mindnotes/sql/data.sql;
+-- 登录后执行（把 <项目根目录> 换成你的实际路径，注意使用正斜杠）
+source <项目根目录>/sql/schema.sql;
+source <项目根目录>/sql/data.sql;
 ```
 
 > 表清单：`user`、`course`、`note`、`note_segment`、`note_like`、`contribution`、`contribution_like`、`ai_log`。
@@ -68,7 +68,7 @@ source C:/Users/27767/Doubao/chats/2026-11-03/new-chat-1/zhi-mindnotes/sql/data.
 ## 五、IDEA 启动步骤
 
 1. **不要打开 `src` 子目录**（务必选择含 `pom.xml` 的 `zhi-mindnotes` 根目录）：`File → Open` 选择本工程根目录 `zhi-mindnotes`，IDEA 会识别 `pom.xml` 并作为 Maven 项目导入；若已误开 `src`，先 `File → Close Project`，再按上述方式重开，等待右下角 Maven 依赖下载完成（需联网拉取 Spring Boot 依赖）。
-2. 修改数据库密码：打开 `src/main/resources/application.yml`，把 `spring.datasource.password` 改成你本机 MySQL 的 root 密码。
+2. 配置数据库密码：仓库中不保存明文密码，启动前先设置环境变量 `DB_PASSWORD`（命令行执行 `setx DB_PASSWORD 你本机MySQL的root密码`，重启 IDEA 生效）；账号默认 `root`，可用 `DB_USERNAME` 覆盖。
 3. 找到启动类 `src/main/java/com/zhmindnotes/ZhMindNotesApplication.java`，右键 `Run`。
 4. 控制台出现 `Started ZhMindNotesApplication` 即启动成功，访问 <http://localhost:8080/index.html>。
 5. 首次启动会自动幂等写入：演示账号、6 门课程、3 篇示例笔记（2 公开含文字/图片/音频片段，1 私有），重复启动不会重复插入。
@@ -152,7 +152,7 @@ zhi-mindnotes/
 
 ## 十、常见问题
 
-1. **启动报 Access denied for user**：`application.yml` 中密码与本机 MySQL 不一致，修改后重启。
+1. **启动报 Access denied for user**：环境变量 `DB_PASSWORD` 未设置或与本机 MySQL 不符，按第五、十章说明重新设置后重启。
 2. **Unknown database 'zhi_mindnotes'**：先执行 `schema.sql` 建库。
 3. **图片/音频不显示**：文件保存在运行目录 `./uploads/`，由 `/uploads/**` 静态映射提供；请勿删除运行目录下该文件夹。
 4. **Maven 依赖下载慢/失败**：可在 IDEA `Settings → Build → Maven` 配置阿里云镜像后刷新；本工程不使用本机命令行 mvn。
@@ -160,10 +160,10 @@ zhi-mindnotes/
 6. **隐私与边界**：密码仅存 BCrypt 哈希，接口不返回密码；私有笔记他人直接访问 ID 返回 403。
 7. **报「程序包 javax.servlet / com.fasterxml.jackson.databind / org.springframework.web.servlet 不存在」**：这不是代码问题，而是 IDEA 没有把工程当作 Maven 项目（模块里没有任何依赖库）。
    处理：`File → Close Project` → `File → Open` 选择根目录 `zhi-mindnotes`（含 `pom.xml`）→ 若弹出 `Maven project detected, load it?` 点 `Load`（或右键 `pom.xml` → `Add as Maven Project`）→ 等 `Maven` 面板的依赖下载完成后 `Build → Rebuild Project`。
-8. **不用改 yml 也能换数据库密码**：`application.yml` 已改为支持环境变量：`${DB_USERNAME:root}`、`${DB_PASSWORD:默认值}`。命令行执行 `setx DB_PASSWORD 你的密码` 后重启 IDEA 即可；也可直接在 yml 中修改默认值。
+8. **不用改 yml 也能换数据库密码**：`application.yml` 只读取环境变量：`${DB_USERNAME:root}`、`${DB_PASSWORD:}`（默认空值，因此启动前必须设置密码）。命令行执行 `setx DB_PASSWORD 你的密码` 后重启 IDEA 即可；密码不写入仓库，避免公开泄露。
 9. **只想用命令行构建**：本机未安装独立 Maven，可用 IDEA 自带 Maven（无需下载安装）：
    ```powershell
-   & "D:\Users\27767\Desktop\IntelliJ IDEA 2025.3.4\plugins\maven\lib\maven3\bin\mvn.cmd" -f .\pom.xml clean package -DskipTests
+   & "<IDEA 安装目录>\plugins\maven\lib\maven3\bin\mvn.cmd" -f .\pom.xml clean package -DskipTests
    ```
    本工程已验证该命令可成功编译 39 个源文件。
 10. **打开首页就被弹到登录页（游客无法浏览）**：已修复。原因是 `GET /api/auth/me` 对未登录访客返回 401，前端公共请求把 401 统一跳转登录页，导致首页"打不开"。现 `/api/auth/me` 对游客返回 `code=0, data=null`，并在拦截器放行，游客可正常浏览首页、详情；只有写操作（发布、点赞、补充）才要求登录。
